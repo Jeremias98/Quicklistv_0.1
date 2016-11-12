@@ -1,0 +1,31 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+
+        <!-- Estados Entrada-Salida  -->
+        <item name="android:windowEnterTransition">@transition/explode_transition</item>
+        <item name="android:windowExitTransition">@transition/explode_transition</item>
+
+        <!-- Estados Reingreso-Retorno  -->
+        <item name="android:windowReenterTransition">@transition/explode_transition</item>
+        <item name="android:windowReturnTransition">@transition/explode_transition</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_explode</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_explode</item>
+
+        <!-- Estados ingreso-retorno -->
+        <item name="android:windowSharedElementReenterTransition">@transition/shared_explode</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/shared_explode</item>
+    </style>
+
+</resources>

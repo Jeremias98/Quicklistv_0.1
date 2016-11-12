@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/item_fav"
+            android:icon="@drawable/fav"
+            android:title="Favoritos" />
+        <item
+            android:id="@+id/item_cursos"
+            android:icon="@drawable/book_open"
+            android:title="Cursos" />
+        <item
+            android:id="@+id/item_calendar"
+            android:icon="@drawable/calendar"
+            android:title="Calendario" />
+    </group>
+
+    <item
+        android:checkableBehavior="single"
+        android:title="Comunicacion">
+        <menu>
+
+            <item
+                android:id="@+id/item_acerca"
+                android:icon="@drawable/acerca"
+                android:title="Acerca de" />
+            <item
+                android:id="@+id/item_configuraciones"
+                android:icon="@drawable/contacte"
+                android:title="Configuraciones" />
+            <item
+                android:id="@+id/item_cerrarsesion"
+                android:icon="@drawable/cerrarsesion"
+                android:title="Cerrar Sesion" />
+            <item
+                android:id="@+id/item_salir"
+                android:icon="@drawable/close"
+                android:title="Salir"/>
+        </menu>
+    </item>
+
+</menu>

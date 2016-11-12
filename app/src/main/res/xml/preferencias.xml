@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="ip_config"
+        android:title="Configuracion IP"
+        android:summary="Configurar direcciòn IP para realizar conexiòn"
+        android:dialogTitle="Ingrese IP">
+
+    </EditTextPreference>
+    <PreferenceCategory android:key="acerca"
+        android:title="Acerca de QuickList">
+        <Preference
+            android:title="Versión de la Aplicación : 0.7.2"
+           >
+
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

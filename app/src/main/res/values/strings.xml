@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">QuickList</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Aca van los cursos</string>
+    <string name="date_label_set">Press the button to set the date</string>
+    <string name="date_button_set">Set Date</string>
+    <string name="date_view_set">The Date is: </string>
+    <string name="date_selected"></string>
+    <string name="title_activity_toma_asistencia">TomaAsistencia</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
