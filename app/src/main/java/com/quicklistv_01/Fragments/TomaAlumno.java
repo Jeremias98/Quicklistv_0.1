@@ -7,16 +7,18 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.quicklistv_01.Adapters.AlumnosViewPagerAdapter;
 import com.quicklistv_01.Class.Alumno;
+import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.R;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +32,9 @@ public class TomaAlumno extends Fragment {
     public ViewPager mViewPager;
     public AlumnosViewPagerAdapter adapter;
 
+    // Variables globales
+    private Global globalData;
+
     public static final String ARG_SECTION_NAME = "section_name";
 
     public TomaAlumno() {
@@ -39,6 +44,7 @@ public class TomaAlumno extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        globalData = (Global) getActivity().getApplication().getApplicationContext();
     }
 
     @Override
@@ -55,6 +61,14 @@ public class TomaAlumno extends Fragment {
         ((TextView) rootView.findViewById(R.id.nombre_apellido)).setText(
                 args.getString(ARG_SECTION_NAME));
 
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        ((TextView) rootView.findViewById(R.id.fecha)).setText(
+                currentDateTimeString);
+
+        String grupoActual = globalData.getNameCurrentGrupo();
+        ((TextView) rootView.findViewById(R.id.curso)).setText(
+                grupoActual);
+
         mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
 
         adapter = (AlumnosViewPagerAdapter) mViewPager.getAdapter();
@@ -67,7 +81,7 @@ public class TomaAlumno extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
-                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 0);
+                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -76,7 +90,7 @@ public class TomaAlumno extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
-                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
+                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -85,7 +99,7 @@ public class TomaAlumno extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
-                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
+                adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });

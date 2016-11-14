@@ -32,7 +32,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +64,13 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toma_asistencia);
 
+        globalData = (Global) getApplicationContext();
+
         Intent intent = getIntent();
 
         ArrayList<Integer> ids = intent.getExtras().getIntegerArrayList("ids");
         ArrayList<String> nombres = intent.getExtras().getStringArrayList("names");
+
 
         adapter = new AlumnosViewPagerAdapter(getSupportFragmentManager(), getApplicationContext(), ids, nombres);
 
@@ -133,14 +138,8 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                dialogError("Información", jsonObject.getString("msj"), "Aceptar");
 
-                                JSONArray alumnos_id = jsonObject.getJSONArray("ids");
-                                JSONArray alumnos_asistencia = jsonObject.getJSONArray("asistencia");
-
-                                for (int j = 0; j < alumnos_id.length(); j++) {
-                                    arrayIds.add(alumnos_id.getInt(j));
-                                    arrayAsistencia.add(alumnos_asistencia.getInt(j));
-                                }
                             }
 
 
@@ -162,8 +161,15 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                 Map<String, String> params = new HashMap<String, String>();
 
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                Log.d("Dato", idParam.toString());
+
                 params.put("id_alumnos", idParam.toString());
                 params.put("assist_alumnos", assistParam.toString());
+                params.put("cuenta", globalData.getUserID().toString());
+                params.put("grupo", globalData.getIdCurrentGrupo().toString());
+                params.put("fecha", currentDateTimeString);
 
                 return params;
             }

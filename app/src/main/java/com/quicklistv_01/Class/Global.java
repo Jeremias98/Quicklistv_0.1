@@ -10,6 +10,8 @@ public class Global extends AppController {
     private Integer userID;
     private String userName;
     private String url;
+    private Integer idCurrentGrupo;
+    private String nameCurrentGrupo;
 
     private ArrayList<Integer> idGrupos;
     private ArrayList<String> nameGrupos;
@@ -88,5 +90,21 @@ public class Global extends AppController {
 
     public void setAgregado(boolean agregado) {
         this.agregado = agregado;
+    }
+
+    public Integer getIdCurrentGrupo() {
+        return idCurrentGrupo;
+    }
+
+    public void setIdCurrentGrupo(Integer idCurrentGrupo) {
+        this.idCurrentGrupo = idCurrentGrupo;
+    }
+
+    public String getNameCurrentGrupo() {
+        return nameCurrentGrupo;
+    }
+
+    public void setNameCurrentGrupo(String nameCurrentGrupo) {
+        this.nameCurrentGrupo = nameCurrentGrupo;
     }
 }

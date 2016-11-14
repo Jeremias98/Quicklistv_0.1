@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.quicklistv_01.Class.Curso;
+import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Class.ListaFavoritos;
 import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
@@ -24,15 +25,21 @@ public class CursosDetail extends AppCompatActivity {
     private  String data;
     TextView tomar, cambiar, crear, curso;
 
+    // Variables globales
+    private Global globalData;
+
     private Integer id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos_detail);
+
+        globalData = (Global) getApplicationContext();
+
         Intent i = getIntent();
         curso =(TextView) findViewById(R.id.curso);
-        String name = i.getStringExtra("Nombre");
+        final String name = i.getStringExtra("Nombre");
         id = i.getExtras().getInt("ID");
         curso.setText(name);
         btn_favo = (ImageButton) findViewById(R.id.btn_favorito);
@@ -51,6 +58,8 @@ public class CursosDetail extends AppCompatActivity {
                 }
                 else{
                     intent.putExtra("ID", id);
+                    globalData.setIdCurrentGrupo(id);
+                    globalData.setNameCurrentGrupo(name);
                     startActivity(intent);
                 }
 

@@ -30,6 +30,7 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
 
         this.ids = ids;
         this.nombres = names;
+        // Se agrega al final un valor nulo para saber que es el final
         this.nombres.add(names.size(), null);
         this.context = context;
 
@@ -71,14 +72,6 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
 
     public Integer getAlumnoId(Integer position) {
         return ids.get(position);
-    }
-
-    public String getAlumnoName(Integer position) {
-        return nombres.get(position);
-    }
-
-    public void setAlumnosAsistencia(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
     }
 
     public List<Alumno> getAlumnosAsistencia() {
