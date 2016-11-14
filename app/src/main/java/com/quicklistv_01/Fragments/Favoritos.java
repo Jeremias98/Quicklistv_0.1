@@ -51,7 +51,6 @@ public class Favoritos extends Fragment {
         inciarDatos();
         iniciarAdaptador();
 
-
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaCursos.setLayoutManager(llm);
 
@@ -71,8 +70,10 @@ public class Favoritos extends Fragment {
     }
 
     private void iniciarAdaptador() {
+
         adaptador = new FavoritosAdapter(curso, getContext());
         listaCursos.setAdapter(adaptador);
+
     }
 
 

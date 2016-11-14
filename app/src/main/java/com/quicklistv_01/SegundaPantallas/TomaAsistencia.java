@@ -1,32 +1,18 @@
 package com.quicklistv_01.SegundaPantallas;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v13.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -68,8 +54,8 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
     private ArrayList<Integer> arrayIds;
     private ArrayList<Integer> arrayAsistencia;
 
-    private ArrayList<Integer> idParam;
-    private ArrayList<Integer> asistParam;
+    private ArrayList<Integer> idParam = new ArrayList<>();
+    private ArrayList<Integer> assistParam = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +104,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
         for (int i = 0; i < alumnos.size();i++) {
             idParam.add(alumnos.get(i).getId());
-            asistParam.add(alumnos.get(i).getAsistencia());
+            assistParam.add(alumnos.get(i).getAsistencia());
         }
 
         guardarAsistencia();
@@ -142,6 +128,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                             JSONArray jsonArray = new JSONArray(response);
                             arrayIds = new ArrayList<Integer>();
+                            arrayAsistencia = new ArrayList<Integer>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -154,9 +141,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                                     arrayIds.add(alumnos_id.getInt(j));
                                     arrayAsistencia.add(alumnos_asistencia.getInt(j));
                                 }
-
                             }
-
 
 
                         } catch (JSONException e) {
@@ -178,7 +163,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("id_alumnos", idParam.toString());
-                params.put("assist_alumnos", asistParam.toString());
+                params.put("assist_alumnos", assistParam.toString());
 
                 return params;
             }

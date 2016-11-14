@@ -62,7 +62,8 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
         @Override
         public int getItemCount() {
-            return cursos.size();
+            //return cursos.size();
+            return 0;
         }
 
 
@@ -78,6 +79,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
     @Override
         public void onBindViewHolder(final favoritosViewHolder holder, int position) {
+
             Curso curso = cursos.get(position);
 
             holder.tvCurso.setText(curso.getNombre());
@@ -106,7 +108,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
 
         }
-    public void createMenu(Menu menu, final String data){
+    public void createMenu(Menu menu, final String data) {
         menu.add("Tomar asistencia")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override

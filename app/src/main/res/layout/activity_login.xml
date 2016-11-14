@@ -115,6 +115,6 @@
         android:layout_marginTop="42dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:text="http://192.168.0.29:8084/Quicklist" />
+        android:text="http://192.168.0.2:8084/Quicklist" />
 
 </RelativeLayout>
