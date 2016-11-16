@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.quicklistv_01.Class.Curso;
+import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.R;
 import com.quicklistv_01.SegundaPantallas.TomaAsistencia;
@@ -25,9 +26,12 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 
     private List<Curso> cursos;
     private final Context context;
+    // Variables globales
+    private Global globalData;
 
     public static class cursosViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
+
         private TextView tvCurso;
         public ItemClickListener listener;
         private ImageButton imageButton;
@@ -51,6 +55,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     public CursoAdaptador(List<Curso> cursos, Context context) {
         this.cursos = cursos;
         this.context = context;
+        globalData = (Global) context.getApplicationContext();
     }
 
     @Override
@@ -107,6 +112,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
                     public boolean onMenuItemClick(MenuItem item) {
                         TomaAsistencia.createInstancealtern(
                                 (Activity) context);
+
                         return false;
                     }
                 });
@@ -136,6 +142,9 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     @Override
     public void onItemClick(View view, int position) {
 
+        globalData.setIdCurrentGrupo(cursos.get(position).getId());
+        globalData.setNameCurrentGrupo(cursos.get(position).getNombre());
+
         CursosDetail.createInstancealtern(
                 (Activity) context, cursos.get(position), view);
 
@@ -148,5 +157,4 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 }
 interface ItemClickListener {
     void onItemClick(View view, int position);
-
 }

@@ -41,7 +41,7 @@ public class CursosDetail extends AppCompatActivity {
         curso =(TextView) findViewById(R.id.curso);
         final String name = i.getStringExtra("Nombre");
         id = i.getExtras().getInt("ID");
-        curso.setText(name);
+        curso.setText(globalData.getNameCurrentGrupo());
         btn_favo = (ImageButton) findViewById(R.id.btn_favorito);
         tomar = (TextView) findViewById(R.id.tomar);
         cambiar = (TextView) findViewById(R.id.cambiar);

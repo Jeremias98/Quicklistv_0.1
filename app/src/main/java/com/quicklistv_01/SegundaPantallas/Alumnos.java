@@ -87,8 +87,8 @@ public class Alumnos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( Alumnos.this , TomaAsistencia.class);
-                intent.putIntegerArrayListExtra("ids", arrayIds);
-                intent.putStringArrayListExtra("names", arrayNames);
+                //intent.putIntegerArrayListExtra("ids", arrayIds);
+                //intent.putStringArrayListExtra("names", arrayNames);
                 startActivity(intent);
             }
         });
@@ -142,6 +142,9 @@ public class Alumnos extends AppCompatActivity {
 
                             }
 
+                            globalData.setIdAlumnosEnGrupo(arrayIds);
+                            globalData.setNameAlumnosEnGrupo(arrayNames);
+
                             inciarDatos();
                             iniciarAdaptador();
 
@@ -163,9 +166,9 @@ public class Alumnos extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                Integer id = intent.getExtras().getInt("ID");
+                //Integer id = intent.getExtras().getInt("ID");
 
-                params.put("id_grupo", id.toString());
+                params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
 
                 return params;
             }

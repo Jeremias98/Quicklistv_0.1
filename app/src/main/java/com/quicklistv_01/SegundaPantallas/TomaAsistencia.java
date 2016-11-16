@@ -68,9 +68,10 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
         Intent intent = getIntent();
 
-        ArrayList<Integer> ids = intent.getExtras().getIntegerArrayList("ids");
-        ArrayList<String> nombres = intent.getExtras().getStringArrayList("names");
-
+        //ArrayList<Integer> ids = intent.getExtras().getIntegerArrayList("ids");
+        ArrayList<Integer> ids = globalData.getIdAlumnosEnGrupo();
+        //ArrayList<String> nombres = intent.getExtras().getStringArrayList("names");
+        ArrayList<String> nombres = globalData.getNameAlumnosEnGrupo();
 
         adapter = new AlumnosViewPagerAdapter(getSupportFragmentManager(), getApplicationContext(), ids, nombres);
 
