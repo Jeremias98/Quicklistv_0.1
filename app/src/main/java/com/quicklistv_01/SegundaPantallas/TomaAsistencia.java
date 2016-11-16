@@ -45,7 +45,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
     public static ViewPager mViewPager;
 
     // HTTP stuff
-    public static String TAG = Alumnos.class.getSimpleName();
+    public static String TAG = TomaAsistencia.class.getSimpleName();
 
     // Variables globales
     private Global globalData;
@@ -107,18 +107,19 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         List<Alumno> alumnos;
         alumnos = adapter.getAlumnosAsistencia();
 
-        for (int i = 0; i < alumnos.size();i++) {
+        for (int i = 0; i < alumnos.size(); i++) {
             idParam.add(alumnos.get(i).getId());
             assistParam.add(alumnos.get(i).getAsistencia());
+            guardarAsistencia(i);
         }
 
-        guardarAsistencia();
 
-        //Toast.makeText(getApplicationContext(), alumnos.get(1).getId().toString(), Toast.LENGTH_SHORT).show();
+        //dialogError("Información", "Se guardó la asistencia", "Aceptar");
+        Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
 
     }
 
-    private void guardarAsistencia() {
+    private void guardarAsistencia(final int i) {
 
         showpDialog();
 
@@ -132,13 +133,14 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                         try {
 
                             JSONArray jsonArray = new JSONArray(response);
-                            arrayIds = new ArrayList<Integer>();
-                            arrayAsistencia = new ArrayList<Integer>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                dialogError("Información", jsonObject.getString("msj"), "Aceptar");
+
+                                if(jsonObject.getBoolean("success")) {
+
+                                }
 
                             }
 
@@ -146,6 +148,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         hidepDialog();
                     }
                 }, new Response.ErrorListener() {
@@ -165,11 +168,11 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                 Log.d("Dato", idParam.toString());
 
-                params.put("id_alumnos", idParam.toString());
-                params.put("assist_alumnos", assistParam.toString());
-                params.put("cuenta", globalData.getUserID().toString());
-                params.put("grupo", globalData.getIdCurrentGrupo().toString());
+                params.put("id_alumnos", idParam.get(i).toString());
+                params.put("assist_alumnos", assistParam.get(i).toString());
                 params.put("fecha", currentDateTimeString);
+                params.put("grupo", globalData.getIdCurrentGrupo().toString());
+                params.put("cuenta", globalData.getUserID().toString());
 
                 return params;
             }
