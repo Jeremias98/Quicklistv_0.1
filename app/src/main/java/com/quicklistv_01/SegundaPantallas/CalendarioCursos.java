@@ -2,12 +2,14 @@ package com.quicklistv_01.SegundaPantallas;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class CalendarioCursos extends AppCompatActivity {
     private Calendar calendar;
     private TextView dateView;
     private int year, month, day;
+    private Button btn_buscar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +33,20 @@ public class CalendarioCursos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        btn_buscar = (Button) findViewById(R.id.btn_buscar);
         dateView = (TextView) findViewById(R.id.textView3);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
+        btn_buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarioCursos.this, CursosConsulta.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @SuppressWarnings("deprecation")
@@ -68,7 +77,7 @@ public class CalendarioCursos extends AppCompatActivity {
     };
 
     private void showDate(int year, int month, int day) {
-        dateView.setText(new StringBuilder().append(day).append("-")
+        dateView.setText("La fecha seleccionada es: " + new StringBuilder().append(day).append("-")
                 .append(month).append("-").append(year));
     }
 
