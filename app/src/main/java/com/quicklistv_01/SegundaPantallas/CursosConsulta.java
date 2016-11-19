@@ -1,6 +1,7 @@
 package com.quicklistv_01.SegundaPantallas;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,6 +27,7 @@ import com.quicklistv_01.Class.AppController;
 import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.DividerItemDecoration;
 import com.quicklistv_01.Class.Global;
+import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.R;
 
@@ -33,9 +36,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CursosConsulta extends AppCompatActivity {
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,9 @@ public class CursosConsulta extends AppCompatActivity {
         setContentView(R.layout.activity_cursos_consulta);
         globalData = (Global) getApplicationContext();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        intent = getIntent();
+
         // Progress dialog
         pDialog = new ProgressDialog(CursosConsulta.this);
         pDialog.setMessage("Espere...");
@@ -72,7 +82,7 @@ public class CursosConsulta extends AppCompatActivity {
 
     private ProgressDialog pDialog;
 
-    public static String TAG = Cursos.class.getSimpleName();
+    public static String TAG = CursosDetail.class.getSimpleName();
 
     ArrayList<String> arrayNames;
     ArrayList<Integer> arrayIDs;
@@ -84,7 +94,7 @@ public class CursosConsulta extends AppCompatActivity {
         curso = new ArrayList<Curso>();
 
         for (int i = 0; i < arrayIDs.size(); i++) {
-            curso.add(new Curso(arrayIDs.get(i), arrayNames.get(i), arrayFav.get(i)));
+            curso.add(new Curso(arrayIDs.get(i), arrayNames.get(i)));
         }
 
     }
@@ -102,7 +112,7 @@ public class CursosConsulta extends AppCompatActivity {
 
         showpDialog();
 
-        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/ListarCursosService",
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/BuscarCursosService",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -114,37 +124,18 @@ public class CursosConsulta extends AppCompatActivity {
                             JSONArray jsonArray = new JSONArray(response);
                             arrayNames = new ArrayList<String>();
                             arrayIDs = new ArrayList<Integer>();
-                            arrayFav = new ArrayList<Boolean>();
-
-                            boolean flag = false;
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                JSONArray name = jsonObject.getJSONArray("nombre_curso");
-                                JSONArray id = jsonObject.getJSONArray("id_curso");
+                                JSONArray name = jsonObject.getJSONArray("nombre_grupo");
+                                JSONArray id = jsonObject.getJSONArray("id_grupo");
 
                                 for (int j = 0; j < id.length(); j++) {
-                                    flag = false;
-                                    // Verifico que no aparezcan los cursos que ya administra
-                                    for (int k = 0; k < globalData.getIdGrupos().size(); k++){
-                                        if (globalData.getIdGrupos().get(k) == id.getInt(j)){
-                                            flag = true;
-                                            break;
-                                        }
-                                    }
 
                                     arrayNames.add(name.getString(j));
                                     arrayIDs.add(id.getInt(j));
-
-                                    if (flag) {
-                                        arrayFav.add(true);
-                                    }
-                                    else if (!flag) {
-                                        arrayFav.add(false);
-
-                                    }
 
                                 }
 
@@ -166,7 +157,18 @@ public class CursosConsulta extends AppCompatActivity {
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 hidepDialog();
             }
-        });
+        }){
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                String fecha = intent.getExtras().getString("fecha");
+
+                params.put("fecha", fecha);
+
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);

@@ -5,6 +5,7 @@ package com.quicklistv_01.Class;
  */
 
 public class CursosFav {
+
     private String nombre;
 
     public CursosFav(String nombre) {

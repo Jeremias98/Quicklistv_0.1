@@ -15,6 +15,11 @@ public class Curso {
         this.favorito = favorito;
     }
 
+    public Curso(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }

@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.R;
 
 import java.util.Calendar;
@@ -27,10 +28,16 @@ public class CalendarioCursos extends AppCompatActivity {
     private int year, month, day;
     private Button btn_buscar;
 
+    // HTTP stuff
+    private Global globalData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        globalData = (Global) getApplicationContext();
+
         setContentView(R.layout.activity_calendar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btn_buscar = (Button) findViewById(R.id.btn_buscar);
@@ -44,6 +51,9 @@ public class CalendarioCursos extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarioCursos.this, CursosConsulta.class);
+                intent.putExtra("fecha", day+"-"+(month+1)+"-"+year);
+                Toast.makeText(getApplicationContext(), day+"-"+month+"-"+year, Toast.LENGTH_SHORT)
+                        .show();
                 startActivity(intent);
             }
         });
