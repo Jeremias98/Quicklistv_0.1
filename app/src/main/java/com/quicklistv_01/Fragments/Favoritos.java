@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.quicklistv_01.Adapters.FavoritosAdapter;
 import com.quicklistv_01.Class.Curso;
+import com.quicklistv_01.Class.CursosFav;
 import com.quicklistv_01.Class.DBHelper;
 import com.quicklistv_01.Class.DividerItemDecoration;
 import com.quicklistv_01.R;
@@ -30,8 +31,9 @@ public class Favoritos extends Fragment {
     public FavoritosAdapter adaptador;
     TextView tvCurso;
     RecyclerView listaCursos;
-    private List<Curso> curso;
+    private List<CursosFav> curso;
     ArrayList<String> c = new ArrayList<>();
+    String a[] = {};
 
 
     @Override
@@ -65,6 +67,15 @@ public class Favoritos extends Fragment {
 
         DBHelper helper = new DBHelper(getContext());
         c = helper.llenar();
+        curso = new ArrayList<>();
+
+        for (String nombre : a) {
+            c.add(nombre);
+        }
+        for (String elemento : c) {
+            curso.add(new CursosFav(elemento));
+
+        }
 
 
     }
