@@ -22,6 +22,9 @@ public class Global extends AppController {
     private ArrayList<Integer> idAlumnosEnGrupo;
     private ArrayList<String> nameAlumnosEnGrupo;
 
+    private ArrayList<Integer> idAlumnosAusentesRecurrentes;
+    private ArrayList<String> nameAlumnosAusentesRecurrentes;
+
     private boolean agregado = false;
 
     public Integer getUserID() {
