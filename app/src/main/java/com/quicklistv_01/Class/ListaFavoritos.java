@@ -20,13 +20,14 @@ public class ListaFavoritos {
         helper = new DBHelper(context);
         db = helper.getWritableDatabase();
     }
-    public ContentValues generarContentValues(String curso){
+    public ContentValues generarContentValuesName(String curso){
         ContentValues contentValues = new ContentValues();
         contentValues.put(CURSO, curso);
         return contentValues;
     }
+
     public void insertar(String curso){
-        db.insert(TABLE_NAME, null, generarContentValues(curso));
+        db.insert(TABLE_NAME, null, generarContentValuesName(curso));
     }
     public void eliminar(String curso){
         db.delete(TABLE_NAME, CURSO+"=?", new String[]{curso});

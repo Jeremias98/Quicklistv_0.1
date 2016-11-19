@@ -105,7 +105,7 @@ public class CursosDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ListaFavoritos db = new ListaFavoritos(getBaseContext());
-                data = curso.getText().toString();
+                data = globalData.getNameCurrentGrupo();
                 db.insertar(data);
                 Toast.makeText(CursosDetail.this, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
 

@@ -7,6 +7,7 @@ package com.quicklistv_01.Class;
 public class CursosFav {
 
     private String nombre;
+    private Integer id;
 
     public CursosFav(String nombre) {
         this.nombre = nombre;
@@ -18,5 +19,13 @@ public class CursosFav {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
