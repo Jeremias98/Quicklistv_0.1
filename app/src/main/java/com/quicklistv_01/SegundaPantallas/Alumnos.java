@@ -1,6 +1,8 @@
 package com.quicklistv_01.SegundaPantallas;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -83,10 +85,11 @@ public class Alumnos extends AppCompatActivity {
 
         listaAlumno.addItemDecoration(new DividerItemDecoration(getBaseContext()));
         listaAlumno.addItemDecoration( new DividerItemDecoration(Alumnos.this, R.drawable.barra));
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( Alumnos.this , TomaAsistencia.class);
+                Intent intent = new Intent( Alumnos.this , TomaAsistencia.class );
                 //intent.putIntegerArrayListExtra("ids", arrayIds);
                 //intent.putStringArrayListExtra("names", arrayNames);
                 startActivity(intent);
@@ -109,6 +112,15 @@ public class Alumnos extends AppCompatActivity {
     private void iniciarAdaptador(){
         adaptador = new AlumnosAdaptador(alumnos, getBaseContext());
         listaAlumno.setAdapter(adaptador);
+    }
+
+    public static void createInstancealtern(Activity activity) {
+        Intent intent = getLaunchIntentaltern(activity);
+        activity.startActivity(intent);
+    }
+    public static Intent getLaunchIntentaltern(Context context) {
+        Intent intent = new Intent(context, Alumnos.class);
+        return intent;
     }
 
     private void alumnosEnGrupo() {

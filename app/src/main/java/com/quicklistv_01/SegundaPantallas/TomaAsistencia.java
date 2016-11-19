@@ -85,6 +85,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         mViewPager.setAdapter(adapter);
 
     }
+
     public static void createInstancealtern(Activity activity) {
         Intent intent = getLaunchIntentaltern(activity);
         activity.startActivity(intent);

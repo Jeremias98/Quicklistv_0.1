@@ -2,6 +2,7 @@ package com.quicklistv_01.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.R;
+import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.TomaAsistencia;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 
@@ -74,7 +76,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 
 
     @Override
-    public void onBindViewHolder(final cursosViewHolder cursosViewHolder, int position) {
+    public void onBindViewHolder(final cursosViewHolder cursosViewHolder, final int position) {
        Curso curso = cursos.get(position);
 
         cursosViewHolder.tvCurso.setText(curso.getNombre());
@@ -82,7 +84,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
             @Override
             public void onClick(View v) {
                 cursosViewHolder.popupMenu = new PopupMenu(v.getContext(), v);
-                createMenu(cursosViewHolder.popupMenu.getMenu());
+                createMenu(cursosViewHolder.popupMenu.getMenu(), position);
 
                 cursosViewHolder.popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
                     @Override
@@ -105,13 +107,20 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 
 
     }
-    public void createMenu(Menu menu){
+    public void createMenu(Menu menu, final int position){
+
         menu.add("Tomar asistencia")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        TomaAsistencia.createInstancealtern(
+
+                        globalData.setIdCurrentGrupo(cursos.get(position).getId());
+                        globalData.setNameCurrentGrupo(cursos.get(position).getNombre());
+
+                        Alumnos.createInstancealtern(
                                 (Activity) context);
+                        //Intent intent = new Intent(context.getApplicationContext(), Alumnos.class);
+
 
                         return false;
                     }

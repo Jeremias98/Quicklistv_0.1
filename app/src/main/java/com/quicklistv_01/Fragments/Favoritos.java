@@ -77,7 +77,6 @@ public class Favoritos extends Fragment {
 
         }
 
-
     }
 
     private void iniciarAdaptador() {
