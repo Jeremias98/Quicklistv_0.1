@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Class.Global"
         android:allowBackup="true"
         android:icon="@mipmap/logo2"
-        android:name=".Class.Global"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -21,8 +21,6 @@
             android:label="Acerca de"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait">
-
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -39,7 +37,6 @@
             android:label="Detalles"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -49,7 +46,6 @@
             android:label="Calendario"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
@@ -97,19 +93,27 @@
             android:label="Modificar"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".SegundaPantallas.VerSubGrupos"
+        <activity
+            android:name=".SegundaPantallas.VerSubGrupos"
             android:label="Subgrupos"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
+        </activity>
+        <activity android:name=".SegundaPantallas.CursosConsulta"
+            android:label="Cursos"
+            android:parentActivityName=".SegundaPantallas.CalendarioCursos"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SegundaPantallas.CalendarioCursos" />>
+
         </activity>
     </application>
 
