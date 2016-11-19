@@ -61,7 +61,11 @@ public class TomaAlumno extends Fragment {
         ((TextView) rootView.findViewById(R.id.nombre_apellido)).setText(
                 args.getString(ARG_SECTION_NAME));
 
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        java.util.Date dt = new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("dd-MM-yyyy");
+        String currentDateTimeString = sdf.format(dt);
+        //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         ((TextView) rootView.findViewById(R.id.fecha)).setText(
                 currentDateTimeString);
 
@@ -80,7 +84,7 @@ public class TomaAlumno extends Fragment {
         btn_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
@@ -89,7 +93,7 @@ public class TomaAlumno extends Fragment {
         btn_ausente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
@@ -98,7 +102,7 @@ public class TomaAlumno extends Fragment {
         btn_tarde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }

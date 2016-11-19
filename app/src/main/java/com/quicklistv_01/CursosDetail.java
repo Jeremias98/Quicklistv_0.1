@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Class.ListaFavoritos;
+import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 
@@ -112,6 +113,13 @@ public class CursosDetail extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CursosDetail.this, Home.class);
+        startActivity(intent);
+    }
+
     //Creamos una instanancia de la aplicacion para que pueda ser invocada desde una clase.
     public static void createInstancealtern(Activity activity, Curso title, View view) {
         Intent intent = getLaunchIntentaltern(activity,title);

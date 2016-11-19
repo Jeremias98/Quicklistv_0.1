@@ -26,6 +26,7 @@ public class CalendarioCursos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -67,8 +68,8 @@ public class CalendarioCursos extends AppCompatActivity {
     };
 
     private void showDate(int year, int month, int day) {
-        dateView.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        dateView.setText(new StringBuilder().append(day).append("-")
+                .append(month).append("-").append(year));
     }
 
 }

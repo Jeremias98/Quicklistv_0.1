@@ -25,6 +25,7 @@ import com.quicklistv_01.Adapters.AlumnosViewPagerAdapter;
 import com.quicklistv_01.Class.Alumno;
 import com.quicklistv_01.Class.AppController;
 import com.quicklistv_01.Class.Global;
+import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.Fragments.TomaAlumno;
 import com.quicklistv_01.R;
 
@@ -114,9 +115,13 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
             guardarAsistencia(i);
         }
 
-
-        //dialogError("Información", "Se guardó la asistencia", "Aceptar");
         Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(TomaAsistencia.this, CursosDetail.class);
+        intent.putExtra("Nombre", globalData.getNameCurrentGrupo().toString());
+        intent.putExtra("ID", globalData.getIdCurrentGrupo());
+        startActivity(intent);
+        //dialogError("Información", "Se guardó la asistencia", "Aceptar");
 
     }
 
@@ -165,7 +170,12 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                java.util.Date dt = new java.util.Date();
+                java.text.SimpleDateFormat sdf =
+                        new java.text.SimpleDateFormat("dd-MM-yyyy");
+
+                //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                String currentDateTimeString = sdf.format(dt);
 
                 Log.d("Dato", idParam.toString());
 
