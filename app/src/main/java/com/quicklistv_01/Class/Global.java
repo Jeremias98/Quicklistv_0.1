@@ -23,7 +23,10 @@ public class Global extends AppController {
     private ArrayList<String> nameAlumnosEnGrupo;
 
     private ArrayList<Integer> idAlumnosAusentesRecurrentes;
-    private ArrayList<String> nameAlumnosAusentesRecurrentes;
+    private ArrayList<String> nombreAlumnosAusentesRecurrentes;
+    private ArrayList<String> telefonoAlumnosAusentesRecurrentes;
+    private ArrayList<String> celularAlumnosAusentesRecurrentes;
+    private ArrayList<String> emailAlumnosAusentesRecurrentes;
 
     private boolean agregado = false;
 
@@ -119,11 +122,35 @@ public class Global extends AppController {
         this.idAlumnosAusentesRecurrentes = idAlumnosAusentesRecurrentes;
     }
 
-    public ArrayList<String> getNameAlumnosAusentesRecurrentes() {
-        return nameAlumnosAusentesRecurrentes;
+    public ArrayList<String> getNombreAlumnosAusentesRecurrentes() {
+        return nombreAlumnosAusentesRecurrentes;
     }
 
-    public void setNameAlumnosAusentesRecurrentes(ArrayList<String> nameAlumnosAusentesRecurrentes) {
-        this.nameAlumnosAusentesRecurrentes = nameAlumnosAusentesRecurrentes;
+    public void setNombreAlumnosAusentesRecurrentes(ArrayList<String> nombreAlumnosAusentesRecurrentes) {
+        this.nombreAlumnosAusentesRecurrentes = nombreAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getTelefonoAlumnosAusentesRecurrentes() {
+        return telefonoAlumnosAusentesRecurrentes;
+    }
+
+    public void setTelefonoAlumnosAusentesRecurrentes(ArrayList<String> telefonoAlumnosAusentesRecurrentes) {
+        this.telefonoAlumnosAusentesRecurrentes = telefonoAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getCelularAlumnosAusentesRecurrentes() {
+        return celularAlumnosAusentesRecurrentes;
+    }
+
+    public void setCelularAlumnosAusentesRecurrentes(ArrayList<String> celularAlumnosAusentesRecurrentes) {
+        this.celularAlumnosAusentesRecurrentes = celularAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getEmailAlumnosAusentesRecurrentes() {
+        return emailAlumnosAusentesRecurrentes;
+    }
+
+    public void setEmailAlumnosAusentesRecurrentes(ArrayList<String> emailAlumnosAusentesRecurrentes) {
+        this.emailAlumnosAusentesRecurrentes = emailAlumnosAusentesRecurrentes;
     }
 }

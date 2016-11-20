@@ -33,9 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +54,9 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
     private ArrayList<Integer> arrayIds;
     private ArrayList<String> arrayNames;
+    private ArrayList<String> arrayTel;
+    private ArrayList<String> arrayCel;
+    private ArrayList<String> arrayEmail;
 
     private ArrayList<Integer> idParam = new ArrayList<>();
     private ArrayList<Integer> assistParam = new ArrayList<>();
@@ -215,20 +216,29 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                                 JSONArray alumnos_id = jsonObject.getJSONArray("id");
                                 JSONArray alumnos_name = jsonObject.getJSONArray("name");
+                                JSONArray alumnos_tel = jsonObject.getJSONArray("phone");
+                                JSONArray alumnos_cel = jsonObject.getJSONArray("mobile");
+                                JSONArray alumnos_email = jsonObject.getJSONArray("email");
 
                                 for (int j = 0; j < alumnos_id.length(); j++) {
                                     arrayIds.add(alumnos_id.getInt(j));
                                     arrayNames.add(alumnos_name.getString(j));
+                                    arrayTel.add(alumnos_tel.getString(j));
+                                    arrayCel.add(alumnos_cel.getString(j));
+                                    arrayEmail.add(alumnos_email.getString(j));
                                 }
 
                             }
 
                             globalData.setIdAlumnosAusentesRecurrentes(arrayIds);
-                            globalData.setNameAlumnosAusentesRecurrentes(arrayNames);
+                            globalData.setNombreAlumnosAusentesRecurrentes(arrayNames);
+                            globalData.setTelefonoAlumnosAusentesRecurrentes(arrayTel);
+                            globalData.setCelularAlumnosAusentesRecurrentes(arrayCel);
+                            globalData.setEmailAlumnosAusentesRecurrentes(arrayEmail);
 
                             //Log.d("Pepe", arrayNames.toString());
                             Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getApplicationContext(), globalData.getNameAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), globalData.getNombreAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
 
                             //Log.d("Pepe", arrayNames.toString());
 
