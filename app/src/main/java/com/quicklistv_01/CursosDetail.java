@@ -42,7 +42,7 @@ public class CursosDetail extends AppCompatActivity {
         Intent i = getIntent();
         curso =(TextView) findViewById(R.id.curso);
         final String name = i.getStringExtra("Nombre");
-        id = i.getExtras().getInt("ID");
+        id = globalData.getIdCurrentGrupo();
         curso.setText(globalData.getNameCurrentGrupo());
         btn_favo = (ImageButton) findViewById(R.id.btn_favorito);
         tomar = (TextView) findViewById(R.id.tomar);
@@ -59,7 +59,7 @@ public class CursosDetail extends AppCompatActivity {
                     android.support.v13.app.ActivityCompat.startActivity(CursosDetail.this, intent, options.toBundle());
                 }
                 else{
-                    intent.putExtra("ID", id);
+                    //intent.putExtra("ID", id);
                     globalData.setIdCurrentGrupo(id);
                     globalData.setNameCurrentGrupo(name);
                     startActivity(intent);

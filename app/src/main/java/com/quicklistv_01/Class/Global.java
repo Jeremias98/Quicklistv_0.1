@@ -110,4 +110,20 @@ public class Global extends AppController {
     public void setNameCurrentGrupo(String nameCurrentGrupo) {
         this.nameCurrentGrupo = nameCurrentGrupo;
     }
+
+    public ArrayList<Integer> getIdAlumnosAusentesRecurrentes() {
+        return idAlumnosAusentesRecurrentes;
+    }
+
+    public void setIdAlumnosAusentesRecurrentes(ArrayList<Integer> idAlumnosAusentesRecurrentes) {
+        this.idAlumnosAusentesRecurrentes = idAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getNameAlumnosAusentesRecurrentes() {
+        return nameAlumnosAusentesRecurrentes;
+    }
+
+    public void setNameAlumnosAusentesRecurrentes(ArrayList<String> nameAlumnosAusentesRecurrentes) {
+        this.nameAlumnosAusentesRecurrentes = nameAlumnosAusentesRecurrentes;
+    }
 }

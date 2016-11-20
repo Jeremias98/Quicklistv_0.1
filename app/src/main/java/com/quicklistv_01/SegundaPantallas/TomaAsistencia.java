@@ -55,7 +55,7 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
     private ProgressDialog pDialog;
 
     private ArrayList<Integer> arrayIds;
-    private ArrayList<Integer> arrayAsistencia;
+    private ArrayList<String> arrayNames;
 
     private ArrayList<Integer> idParam = new ArrayList<>();
     private ArrayList<Integer> assistParam = new ArrayList<>();
@@ -116,12 +116,9 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
             guardarAsistencia(i);
         }
 
-        Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
+        revisarAusencias();
 
-        Intent intent = new Intent(TomaAsistencia.this, CursosDetail.class);
-        intent.putExtra("Nombre", globalData.getNameCurrentGrupo().toString());
-        intent.putExtra("ID", globalData.getIdCurrentGrupo());
-        startActivity(intent);
+
         //dialogError("Información", "Se guardó la asistencia", "Aceptar");
 
     }
@@ -185,6 +182,81 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                 params.put("fecha", currentDateTimeString);
                 params.put("grupo", globalData.getIdCurrentGrupo().toString());
                 params.put("cuenta", globalData.getUserID().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    private void revisarAusencias() {
+
+        showpDialog();
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/RevisarAsistenciaService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                        try {
+
+                            JSONArray jsonArray = new JSONArray(response);
+                            arrayNames = new ArrayList<String>();
+                            arrayIds = new ArrayList<Integer>();
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                JSONArray alumnos_id = jsonObject.getJSONArray("id");
+                                JSONArray alumnos_name = jsonObject.getJSONArray("name");
+
+                                for (int j = 0; j < alumnos_id.length(); j++) {
+                                    arrayIds.add(alumnos_id.getInt(j));
+                                    arrayNames.add(alumnos_name.getString(j));
+                                }
+
+                            }
+
+                            globalData.setIdAlumnosAusentesRecurrentes(arrayIds);
+                            globalData.setNameAlumnosAusentesRecurrentes(arrayNames);
+
+                            //Log.d("Pepe", arrayNames.toString());
+                            Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), globalData.getNameAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
+
+                            //Log.d("Pepe", arrayNames.toString());
+
+                            Intent intent = new Intent(TomaAsistencia.this, CursosDetail.class);
+                            intent.putExtra("Nombre", globalData.getNameCurrentGrupo().toString());
+                            intent.putExtra("ID", globalData.getIdCurrentGrupo());
+                            startActivity(intent);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        hidepDialog();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                hidepDialog();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
 
                 return params;
             }
