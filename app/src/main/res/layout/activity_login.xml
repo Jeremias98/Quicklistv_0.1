@@ -23,6 +23,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Usuario"
+                android:text="Luis"
                 android:inputType="text"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
@@ -47,6 +48,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
+                android:text="1234"
                 android:inputType="textPassword"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>

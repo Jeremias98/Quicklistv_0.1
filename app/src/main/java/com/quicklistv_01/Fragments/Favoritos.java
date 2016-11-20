@@ -78,6 +78,7 @@ public class Favoritos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View rootView = inflater.inflate(R.layout.fragment_favoritos, container, false);
         listaCursos = (RecyclerView) rootView.findViewById(R.id.rvFavoritos);
         tvCurso = (TextView) rootView.findViewById(R.id.tvCurso);

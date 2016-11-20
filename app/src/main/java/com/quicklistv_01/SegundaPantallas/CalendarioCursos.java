@@ -43,16 +43,19 @@ public class CalendarioCursos extends AppCompatActivity {
         btn_buscar = (Button) findViewById(R.id.btn_buscar);
         dateView = (TextView) findViewById(R.id.textView3);
         calendar = Calendar.getInstance();
+
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);
+
         btn_buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CalendarioCursos.this, CursosConsulta.class);
-                intent.putExtra("fecha", day+"-"+(month+1)+"-"+year);
-                Toast.makeText(getApplicationContext(), day+"-"+month+"-"+year, Toast.LENGTH_SHORT)
+                String f = day+"-"+(month+1)+"-"+year;
+                intent.putExtra("fecha", f);
+                Toast.makeText(getApplicationContext(), f, Toast.LENGTH_SHORT)
                         .show();
                 startActivity(intent);
             }
@@ -82,6 +85,9 @@ public class CalendarioCursos extends AppCompatActivity {
             // arg1 = year
             // arg2 = month
             // arg3 = day
+            year = arg1;
+            month = arg2;
+            day = arg3;
             showDate(arg1, arg2+1, arg3);
         }
     };
