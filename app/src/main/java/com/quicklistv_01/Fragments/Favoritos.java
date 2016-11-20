@@ -92,9 +92,9 @@ public class Favoritos extends Fragment {
         listaCursos.addItemDecoration(new DividerItemDecoration(getContext()));
         listaCursos.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.barra));
 
-
         return rootView;
     }
+
     public void iniciarDatos() {
 
         DBHelper helper = new DBHelper(getContext());

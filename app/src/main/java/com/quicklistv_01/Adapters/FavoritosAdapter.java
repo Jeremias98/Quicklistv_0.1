@@ -83,7 +83,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
     @Override
         public void onBindViewHolder(final favoritosViewHolder holder, final int position) {
 
-            CursosFav curso = cursos.get(position);
+            final CursosFav curso = cursos.get(position);
             final String  data = holder.tvCurso.getText().toString();
             holder.tvCurso.setText(curso.getNombre());
 
@@ -91,7 +91,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                 @Override
                 public void onClick(View v) {
                     holder.popupMenu = new PopupMenu(v.getContext(), v);
-                    createMenu(holder.popupMenu.getMenu(), data, position);
+                    createMenu(holder.popupMenu.getMenu(), data, curso);
 
                     holder.popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
                         @Override
@@ -111,14 +111,14 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
 
         }
-    public void createMenu(Menu menu, final String data, final int position) {
+    public void createMenu(Menu menu, final String data, final CursosFav cursosFav) {
         menu.add("Tomar asistencia")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        globalData.setIdCurrentGrupo(cursos.get(position).getId());
-                        globalData.setNameCurrentGrupo(cursos.get(position).getNombre());
+                        globalData.setIdCurrentGrupo(cursosFav.getId());
+                        globalData.setNameCurrentGrupo(cursosFav.getNombre());
 
                         Alumnos.createInstancealtern(
                                 (Activity) context);
