@@ -84,9 +84,9 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
         public void onBindViewHolder(final favoritosViewHolder holder, final int position) {
 
             CursosFav curso = cursos.get(position);
-
-            holder.tvCurso.setText(curso.getNombre());
             final String  data = holder.tvCurso.getText().toString();
+            holder.tvCurso.setText(curso.getNombre());
+
             holder.imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -152,8 +152,8 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
         @Override
         public void onItemClick(View view, int position) {
-            /*CursosDetail.createInstancealtern(
-                    (Activity) context, cursos.get(position), view);*/
+            CursosDetail.createInstance(
+                    (Activity) context, cursos.get(position), view);
 
 
         }

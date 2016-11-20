@@ -6,10 +6,18 @@ package com.quicklistv_01.Class;
 
 public class CursosFav {
 
-    private String nombre;
     private Integer id;
+    private String nombre;
+    private boolean favorito;
 
-    public CursosFav(String nombre) {
+    public CursosFav(Integer id, String nombre, Boolean favorito) {
+        this.id = id;
+        this.nombre = nombre;
+        this.favorito = favorito;
+    }
+
+    public CursosFav(Integer id, String nombre) {
+        this.id = id;
         this.nombre = nombre;
     }
 
@@ -27,5 +35,13 @@ public class CursosFav {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 }

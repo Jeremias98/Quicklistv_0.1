@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.quicklistv_01.Class.Curso;
+import com.quicklistv_01.Class.CursosFav;
 import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Class.ListaFavoritos;
 import com.quicklistv_01.Fragments.Cursos;
@@ -106,7 +107,7 @@ public class CursosDetail extends AppCompatActivity {
             public void onClick(View v) {
                 ListaFavoritos db = new ListaFavoritos(getBaseContext());
                 data = globalData.getNameCurrentGrupo();
-                db.insertar(data);
+                db.insertar(id, data);
                 Toast.makeText(CursosDetail.this, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
 
             }
@@ -134,6 +135,24 @@ public class CursosDetail extends AppCompatActivity {
         }
     }
     public static Intent getLaunchIntentaltern(Context context, Curso curso) {
+        Intent intent = new Intent(context, CursosDetail.class);
+        intent.putExtra("Nombre", curso.getNombre());
+        intent.putExtra("ID", curso.getId());
+        return intent;
+    }
+    public static void createInstance(Activity activity, CursosFav title, View view) {
+        Intent intent = getLaunchIntental(activity,title);
+        //activity.startActivity(intent);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, new Pair<View, String>(view.findViewById(R.id.tvCurso),
+                    "trans_animation"));
+            android.support.v13.app.ActivityCompat.startActivity(activity, intent, options.toBundle());
+        }
+        else{
+            activity.startActivity(intent);
+        }
+    }
+    public static Intent getLaunchIntental(Context context, CursosFav curso) {
         Intent intent = new Intent(context, CursosDetail.class);
         intent.putExtra("Nombre", curso.getNombre());
         intent.putExtra("ID", curso.getId());
