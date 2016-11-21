@@ -38,13 +38,22 @@ public class Notificaciones extends AppCompatActivity {
     RecyclerView listaNotificaciones;
     public static String TAG = Alumnos.class.getSimpleName();
     private Global globalData;
-    ArrayList<Integer> arrayIds;
     private ProgressDialog pDialog;
+    ArrayList<Integer> arrayIds;
     ArrayList<String> arrayNames;
+    ArrayList<String> arrayCurso;
+    ArrayList<String> arrayTelefono;
+    ArrayList<String> arrayDNI;
+    ArrayList<String> arrayInasistencia;
+    ArrayList<String> arrayEmail;
+    ArrayList<String> arrayDireccion;
+    ArrayList<String> arrayNacionalidad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
+        globalData = (Global) getApplicationContext();
         listaNotificaciones = (RecyclerView) findViewById(R.id.rvNotificaciones);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         LinearLayoutManager llm = new LinearLayoutManager(Notificaciones.this);
@@ -57,24 +66,36 @@ public class Notificaciones extends AppCompatActivity {
         listaNotificaciones.setLayoutManager(llm);
 
         listaNotificaciones.addItemDecoration(new DividerItemDecoration(getBaseContext()));
-        listaNotificaciones.addItemDecoration( new DividerItemDecoration(Notificaciones.this, R.drawable.barra));
+        listaNotificaciones.addItemDecoration(new DividerItemDecoration(Notificaciones.this, R.drawable.barra));
     }
-    public void inciarDatos(){
+
+    public void iniciarDatos() {
 
         alumnos = new ArrayList<>();
+        arrayIds = new ArrayList<>();
+        if (arrayIds.size() == 0) {
 
-            alumnos.add(new NotificacionesClass( 1 , "Aaron Saban", "7°3", "41166893", "5", "aa@gmail.com", "1151326831", "Calle Falsa 123" , "Argentina"));
+        } else {
+            for (int i = 0; i < arrayIds.size(); i++) {
+                alumnos.add(new NotificacionesClass(arrayIds.get(i), arrayNames.get(i), "7°3°", " 123456789", "5", arrayEmail.get(i), arrayTelefono.get(i), "Calle falsa 123", "Argentina"));
+            }
+        }
 
     }
+
     public NotifacionesAdaptador adaptador;
 
-    private void iniciarAdaptador(){
+    private void iniciarAdaptador() {
         adaptador = new NotifacionesAdaptador(Notificaciones.this, alumnos);
         listaNotificaciones.setAdapter(adaptador);
     }
 
     private void alumnosEnGrupo() {
-            inciarDatos();
-            iniciarAdaptador();
+        arrayIds = globalData.getIdAlumnosAusentesRecurrentes();
+        arrayNames = globalData.getNombreAlumnosAusentesRecurrentes();
+        arrayTelefono = globalData.getTelefonoAlumnosAusentesRecurrentes();
+        arrayEmail = globalData.getEmailAlumnosAusentesRecurrentes();
+        iniciarDatos();
+        iniciarAdaptador();
     }
 }
