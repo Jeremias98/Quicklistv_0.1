@@ -7,21 +7,33 @@ import java.util.ArrayList;
  */
 public class Global extends AppController {
 
+    // Sesion
     private Integer userID;
     private String userName;
     private String url;
     private Integer idCurrentGrupo;
     private String nameCurrentGrupo;
 
+    // Lista de cursos
     private ArrayList<Integer> idGrupos;
     private ArrayList<String> nameGrupos;
 
+    // Era para los favoritos
     private ArrayList<Integer> idGruposSinAdmin;
     private ArrayList<String> nameGruposSinAdmin;
 
+    // Alumnos' stuff
     private ArrayList<Integer> idAlumnosEnGrupo;
     private ArrayList<String> nameAlumnosEnGrupo;
+    private ArrayList<String> dniAlumnosEnGrupo;
+    private ArrayList<String> telefonoAlumnosEnGrupo;
+    private ArrayList<String> celularAlumnosEnGrupo;
+    private ArrayList<String> emailAlumnosEnGrupo;
+    private ArrayList<String> sexoAlumnosEnGrupo;
+    private ArrayList<String> nacionalidadAlumnosEnGrupo;
+    private ArrayList<String> direccionAlumnosEnGrupo;
 
+    // Ausentes con tres faltas seguidas
     private ArrayList<Integer> idAlumnosAusentesRecurrentes;
     private ArrayList<String> nombreAlumnosAusentesRecurrentes;
     private ArrayList<String> telefonoAlumnosAusentesRecurrentes;
@@ -152,5 +164,61 @@ public class Global extends AppController {
 
     public void setEmailAlumnosAusentesRecurrentes(ArrayList<String> emailAlumnosAusentesRecurrentes) {
         this.emailAlumnosAusentesRecurrentes = emailAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getDniAlumnosEnGrupo() {
+        return dniAlumnosEnGrupo;
+    }
+
+    public void setDniAlumnosEnGrupo(ArrayList<String> dniAlumnosEnGrupo) {
+        this.dniAlumnosEnGrupo = dniAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getTelefonoAlumnosEnGrupo() {
+        return telefonoAlumnosEnGrupo;
+    }
+
+    public void setTelefonoAlumnosEnGrupo(ArrayList<String> telefonoAlumnosEnGrupo) {
+        this.telefonoAlumnosEnGrupo = telefonoAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getEmailAlumnosEnGrupo() {
+        return emailAlumnosEnGrupo;
+    }
+
+    public void setEmailAlumnosEnGrupo(ArrayList<String> emailAlumnosEnGrupo) {
+        this.emailAlumnosEnGrupo = emailAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getCelularAlumnosEnGrupo() {
+        return celularAlumnosEnGrupo;
+    }
+
+    public void setCelularAlumnosEnGrupo(ArrayList<String> celularAlumnosEnGrupo) {
+        this.celularAlumnosEnGrupo = celularAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getSexoAlumnosEnGrupo() {
+        return sexoAlumnosEnGrupo;
+    }
+
+    public void setSexoAlumnosEnGrupo(ArrayList<String> sexoAlumnosEnGrupo) {
+        this.sexoAlumnosEnGrupo = sexoAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getNacionalidadAlumnosEnGrupo() {
+        return nacionalidadAlumnosEnGrupo;
+    }
+
+    public void setNacionalidadAlumnosEnGrupo(ArrayList<String> nacionalidadAlumnosEnGrupo) {
+        this.nacionalidadAlumnosEnGrupo = nacionalidadAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getDireccionAlumnosEnGrupo() {
+        return direccionAlumnosEnGrupo;
+    }
+
+    public void setDireccionAlumnosEnGrupo(ArrayList<String> direccionAlumnosEnGrupo) {
+        this.direccionAlumnosEnGrupo = direccionAlumnosEnGrupo;
     }
 }
