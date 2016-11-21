@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -63,6 +65,7 @@ public class Alumnos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumnos);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         globalData = (Global) getApplicationContext();
@@ -96,6 +99,27 @@ public class Alumnos extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_alumnos_drawer, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_notification:
+                    Intent intent = new Intent(Alumnos.this, Notificaciones.class);
+                    startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
     public void inciarDatos(){
 
@@ -110,7 +134,7 @@ public class Alumnos extends AppCompatActivity {
     public AlumnosAdaptador adaptador;
 
     private void iniciarAdaptador(){
-        adaptador = new AlumnosAdaptador(alumnos, getBaseContext());
+        adaptador = new AlumnosAdaptador(alumnos, getApplicationContext());
         listaAlumno.setAdapter(adaptador);
     }
 

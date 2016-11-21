@@ -47,7 +47,7 @@ public class Favoritos extends Fragment {
     public FavoritosAdapter adaptador;
     TextView tvCurso;
     RecyclerView listaCursos;
-    private List<CursosFav> curso;
+    private List<Curso> curso;
     ArrayList<String> c = new ArrayList<>();
     String a[] = {};
     // HTTP stuff
@@ -98,6 +98,7 @@ public class Favoritos extends Fragment {
     public void iniciarDatos() {
 
         DBHelper helper = new DBHelper(getContext());
+        helper.open();
         c = helper.llenar();
         curso = new ArrayList<>();
 
@@ -106,8 +107,9 @@ public class Favoritos extends Fragment {
         }
 
         for (int i = 0; i < c.size(); i++) {
-            curso.add(new CursosFav(arrayIDs.get(i), c.get(i), arrayFav.get(i)));
+            curso.add(new Curso(arrayIDs.get(i), c.get(i), arrayFav.get(i)));
         }
+        helper.close();
 
     }
 

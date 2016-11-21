@@ -134,28 +134,13 @@ public class CursosDetail extends AppCompatActivity {
             activity.startActivity(intent);
         }
     }
+
+
     public static Intent getLaunchIntentaltern(Context context, Curso curso) {
         Intent intent = new Intent(context, CursosDetail.class);
         intent.putExtra("Nombre", curso.getNombre());
         intent.putExtra("ID", curso.getId());
         return intent;
     }
-    public static void createInstance(Activity activity, CursosFav title, View view) {
-        Intent intent = getLaunchIntental(activity,title);
-        //activity.startActivity(intent);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, new Pair<View, String>(view.findViewById(R.id.tvCurso),
-                    "trans_animation"));
-            android.support.v13.app.ActivityCompat.startActivity(activity, intent, options.toBundle());
-        }
-        else{
-            activity.startActivity(intent);
-        }
-    }
-    public static Intent getLaunchIntental(Context context, CursosFav curso) {
-        Intent intent = new Intent(context, CursosDetail.class);
-        intent.putExtra("Nombre", curso.getNombre());
-        intent.putExtra("ID", curso.getId());
-        return intent;
-    }
+    
 }

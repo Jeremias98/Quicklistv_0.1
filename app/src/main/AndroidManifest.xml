@@ -106,13 +106,33 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Home" />
         </activity>
-        <activity android:name=".SegundaPantallas.CursosConsulta"
+        <activity
+            android:name=".SegundaPantallas.CursosConsulta"
             android:label="Cursos"
             android:parentActivityName=".SegundaPantallas.CalendarioCursos"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SegundaPantallas.CalendarioCursos" />>
+                android:value=".SegundaPantallas.CalendarioCursos" />
+            >
+        </activity>
+        <activity
+            android:name=".SegundaPantallas.Notificaciones"
+            android:label="Alerta de alumnos"
+            android:parentActivityName=".SegundaPantallas.Alumnos"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SegundaPantallas.Alumnos" />
+
+        </activity>
+        <activity android:name=".SegundaPantallas.AlumnosDetail"
+            android:label="Datos del alumno"
+            android:parentActivityName=".SegundaPantallas.Notificaciones"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SegundaPantallas.Notificaciones" />>
 
         </activity>
     </application>

@@ -47,6 +47,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
             itemView.setOnClickListener(this);
 
         }
+
         @Override
         public void onClick(View v) {
             listener.onItemClick(v, getAdapterPosition());
@@ -66,7 +67,6 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     }
 
 
-
     @Override
     public cursosViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
@@ -77,7 +77,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 
     @Override
     public void onBindViewHolder(final cursosViewHolder cursosViewHolder, final int position) {
-       Curso curso = cursos.get(position);
+        Curso curso = cursos.get(position);
 
         cursosViewHolder.tvCurso.setText(curso.getNombre());
         cursosViewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
@@ -102,12 +102,9 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
         }
 
 
-
-
-
-
     }
-    public void createMenu(Menu menu, final int position){
+
+    public void createMenu(Menu menu, final int position) {
 
         menu.add("Tomar asistencia")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -147,7 +144,6 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     }
 
 
-
     @Override
     public void onItemClick(View view, int position) {
 
@@ -161,9 +157,8 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     }
 
 
-
-
 }
+
 interface ItemClickListener {
     void onItemClick(View view, int position);
 }

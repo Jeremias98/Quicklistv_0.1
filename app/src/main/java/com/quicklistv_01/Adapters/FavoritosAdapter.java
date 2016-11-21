@@ -25,92 +25,92 @@ import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 import java.util.List;
 
 
-
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favoritosViewHolder>
-        implements RecyclerItemClickListener.OnItemClickListener, ItemClickListener {
+        implements RecyclerItemClickListener.OnItemClickListener, ItemClickListenerFavoritos {
 
 
-        private List<CursosFav> cursos;
-        boolean isPressed = false;
-        private final Context context;
-        // Variables globales
-        private Global globalData;
+    private List<Curso> cursos;
+    boolean isPressed = false;
+    private final Context context;
+    // Variables globales
+    private Global globalData;
 
-        public static class favoritosViewHolder extends RecyclerView.ViewHolder
-                implements View.OnClickListener {
-            private TextView tvCurso;
-            public com.quicklistv_01.Adapters.ItemClickListener listener;
-            private ImageButton imageButton;
-            private PopupMenu popupMenu;
-
-            public favoritosViewHolder(View itemView, ItemClickListener listener) {
-                super(itemView);
-                this.listener = listener;
-                tvCurso = (TextView) itemView.findViewById(R.id.tvCurso);
-                this.imageButton = (ImageButton) itemView.findViewById(R.id.imageButton);
-                itemView.setOnClickListener(this);
-
-            }
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(v, getAdapterPosition());
-            }
-        }
+    public static class favoritosViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
+        private TextView tvCurso;
+        public ItemClickListenerFavoritos listener;
+        private ImageButton imageButton;
+        private PopupMenu popupMenu;
 
 
-        public FavoritosAdapter(List<CursosFav> cursos, Context context) {
-            this.cursos = cursos;
-            this.context = context;
-            globalData = (Global) context.getApplicationContext();
+        public favoritosViewHolder(View itemView, ItemClickListenerFavoritos listener) {
+            super(itemView);
+            this.listener = listener;
+            itemView.setOnClickListener(this);
+            tvCurso = (TextView) itemView.findViewById(R.id.tvCurso);
+            this.imageButton = (ImageButton) itemView.findViewById(R.id.imageButton);
+
+
         }
 
         @Override
-        public int getItemCount() {
-            return cursos == null ? 0: cursos.size();
+        public void onClick(View v) {
+            listener.onItemClick(v, getAdapterPosition());
         }
 
+    }
 
 
-        @Override
-        public favoritosViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.cursos_list, viewGroup, false);
-            return new favoritosViewHolder(v, this);
-        }
+    public FavoritosAdapter(List<Curso> cursos, Context context) {
+        this.cursos = cursos;
+        this.context = context;
+        globalData = (Global) context.getApplicationContext();
+    }
 
+    @Override
+    public int getItemCount() {
+        return cursos == null ? 0 : cursos.size();
+    }
+
+    @Override
+    public favoritosViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.cursos_list, viewGroup, false);
+        return new favoritosViewHolder(v, this);
+    }
 
 
     @Override
-        public void onBindViewHolder(final favoritosViewHolder holder, final int position) {
+    public void onBindViewHolder(final favoritosViewHolder holder, final int position) {
 
-            final CursosFav curso = cursos.get(position);
-            final String  data = holder.tvCurso.getText().toString();
-            holder.tvCurso.setText(curso.getNombre());
+        final Curso curso = cursos.get(position);
+        holder.tvCurso.setText(curso.getNombre());
+        final String data = holder.tvCurso.getText().toString();
 
-            holder.imageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.popupMenu = new PopupMenu(v.getContext(), v);
-                    createMenu(holder.popupMenu.getMenu(), data, position);
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.popupMenu = new PopupMenu(v.getContext(), v);
+                createMenu(holder.popupMenu.getMenu(), data, position);
 
-                    holder.popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-                        @Override
-                        public void onDismiss(PopupMenu menu) {
-                            holder.popupMenu = null;
-                        }
-                    });
-                    holder.popupMenu.show();
+                holder.popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                    @Override
+                    public void onDismiss(PopupMenu menu) {
+                        holder.popupMenu = null;
+                    }
+                });
+                holder.popupMenu.show();
 
-                }
-
-            });
-            if (holder.popupMenu != null) {
-                holder.popupMenu.dismiss();
             }
 
-
-
+        });
+        if (holder.popupMenu != null) {
+            holder.popupMenu.dismiss();
         }
+
+
+    }
+
     public void createMenu(Menu menu, final String data, final int position) {
         menu.add("Tomar asistencia")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -123,7 +123,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                         Alumnos.createInstancealtern(
                                 (Activity) context);
                         //TomaAsistencia.createInstancealtern(
-                          //      (Activity) context);
+                        //      (Activity) context);
                         return false;
                     }
                 });
@@ -149,17 +149,18 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
     }
 
 
-
-        @Override
-        public void onItemClick(View view, int position) {
-            CursosDetail.createInstance(
-                    (Activity) context, cursos.get(position), view);
-
-
-        }
+    @Override
+    public void onItemClick(View view, int position) {
+        CursosDetail.createInstancealtern(
+                (Activity) context, cursos.get(position), view);
 
 
+    }
 
 
+}
+
+interface ItemClickListenerFavoritos {
+    void onItemClick(View view, int position);
 }
 
