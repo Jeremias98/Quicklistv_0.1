@@ -32,6 +32,7 @@ public class Global extends AppController {
     private ArrayList<String> sexoAlumnosEnGrupo;
     private ArrayList<String> nacionalidadAlumnosEnGrupo;
     private ArrayList<String> direccionAlumnosEnGrupo;
+    private ArrayList<String> asistenciaAlumnosEnGrupo;
 
     // Ausentes con tres faltas seguidas
     private ArrayList<Integer> idAlumnosAusentesRecurrentes;
@@ -220,5 +221,13 @@ public class Global extends AppController {
 
     public void setDireccionAlumnosEnGrupo(ArrayList<String> direccionAlumnosEnGrupo) {
         this.direccionAlumnosEnGrupo = direccionAlumnosEnGrupo;
+    }
+
+    public ArrayList<String> getAsistenciaAlumnosEnGrupo() {
+        return asistenciaAlumnosEnGrupo;
+    }
+
+    public void setAsistenciaAlumnosEnGrupo(ArrayList<String> asistenciaAlumnosEnGrupo) {
+        this.asistenciaAlumnosEnGrupo = asistenciaAlumnosEnGrupo;
     }
 }
