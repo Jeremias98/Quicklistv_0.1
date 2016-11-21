@@ -15,13 +15,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.Fragments.Favoritos;
 import com.quicklistv_01.SegundaPantallas.Acerca;
+import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.CalendarioCursos;
+import com.quicklistv_01.SegundaPantallas.Notificaciones;
 import com.quicklistv_01.SegundaPantallas.Preferences;
 
 public class Home extends AppCompatActivity
@@ -77,10 +80,20 @@ public class Home extends AppCompatActivity
         //Seteamos el primer framgment como predeterminado al momento de abrir la activity
         setFragment(1);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_alumnos_drawer, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_notification:
+                Intent intent = new Intent(Home.this, Notificaciones.class);
+                startActivity(intent);
+                return true;
             case android.R.id.home:
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.openDrawer(GravityCompat.START);
