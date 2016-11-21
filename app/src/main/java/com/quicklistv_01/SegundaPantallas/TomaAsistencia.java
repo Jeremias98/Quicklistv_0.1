@@ -209,6 +209,9 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                             JSONArray jsonArray = new JSONArray(response);
                             arrayNames = new ArrayList<String>();
                             arrayIds = new ArrayList<Integer>();
+                            arrayTel = new ArrayList<String>();
+                            arrayCel = new ArrayList<String>();
+                            arrayEmail = new ArrayList<String>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
