@@ -11,8 +11,11 @@ public class Global extends AppController {
     private Integer userID;
     private String userName;
     private String url;
+
+    // Current
     private Integer idCurrentGrupo;
     private String nameCurrentGrupo;
+    private String fechaCurrent;
 
     // Lista de cursos
     private ArrayList<Integer> idGrupos;
@@ -229,5 +232,13 @@ public class Global extends AppController {
 
     public void setAsistenciaAlumnosEnGrupo(ArrayList<String> asistenciaAlumnosEnGrupo) {
         this.asistenciaAlumnosEnGrupo = asistenciaAlumnosEnGrupo;
+    }
+
+    public String getFechaCurrent() {
+        return fechaCurrent;
+    }
+
+    public void setFechaCurrent(String fechaCurrent) {
+        this.fechaCurrent = fechaCurrent;
     }
 }
