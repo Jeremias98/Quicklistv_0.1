@@ -41,7 +41,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_chrome_reader_mode_black_24dp" />
+            />
 
 
         <TextView

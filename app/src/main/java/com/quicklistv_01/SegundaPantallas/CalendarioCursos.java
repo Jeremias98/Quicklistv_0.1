@@ -21,7 +21,6 @@ import java.util.Calendar;
 
 public class CalendarioCursos extends AppCompatActivity {
 
-
     private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
@@ -55,6 +54,7 @@ public class CalendarioCursos extends AppCompatActivity {
                 Intent intent = new Intent(CalendarioCursos.this, CursosConsulta.class);
                 String f = day+"-"+(month+1)+"-"+year;
                 intent.putExtra("fecha", f);
+                globalData.setFechaCurrent(f);
                 Toast.makeText(getApplicationContext(), f, Toast.LENGTH_SHORT)
                         .show();
                 startActivity(intent);

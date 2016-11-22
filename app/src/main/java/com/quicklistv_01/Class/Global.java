@@ -40,9 +40,13 @@ public class Global extends AppController {
     // Ausentes con tres faltas seguidas
     private ArrayList<Integer> idAlumnosAusentesRecurrentes;
     private ArrayList<String> nombreAlumnosAusentesRecurrentes;
+    private ArrayList<String> dniAlumnosAusentesRecurrentes;
+    private ArrayList<String> direccionAlumnosAusentesRecurrentes;
+    private ArrayList<String> nacionalidadAlumnosAusentesRecurrentes;
     private ArrayList<String> telefonoAlumnosAusentesRecurrentes;
     private ArrayList<String> celularAlumnosAusentesRecurrentes;
     private ArrayList<String> emailAlumnosAusentesRecurrentes;
+    private ArrayList<String> cursoAlumnosAusentesRecurrentes;
 
     private boolean agregado = false;
 
@@ -170,6 +174,38 @@ public class Global extends AppController {
         this.emailAlumnosAusentesRecurrentes = emailAlumnosAusentesRecurrentes;
     }
 
+    public ArrayList<String> getDniAlumnosAusentesRecurrentes() {
+        return dniAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getDireccionAlumnosAusentesRecurrentes() {
+        return direccionAlumnosAusentesRecurrentes;
+    }
+
+    public void setDireccionAlumnosAusentesRecurrentes(ArrayList<String> direccionAlumnosAusentesRecurrentes) {
+        this.direccionAlumnosAusentesRecurrentes = direccionAlumnosAusentesRecurrentes;
+    }
+
+    public void setDniAlumnosAusentesRecurrentes(ArrayList<String> dniAlumnosAusentesRecurrentes) {
+        this.dniAlumnosAusentesRecurrentes = dniAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getNacionalidadAlumnosAusentesRecurrentes() {
+        return nacionalidadAlumnosAusentesRecurrentes;
+    }
+
+    public void setNacionalidadAlumnosAusentesRecurrentes(ArrayList<String> nacionalidadAlumnosAusentesRecurrentes) {
+        this.nacionalidadAlumnosAusentesRecurrentes = nacionalidadAlumnosAusentesRecurrentes;
+    }
+
+    public ArrayList<String> getCursoAlumnosAusentesRecurrentes() {
+        return cursoAlumnosAusentesRecurrentes;
+    }
+
+    public void setCursoAlumnosAusentesRecurrentes(ArrayList<String> cursoAlumnosAusentesRecurrentes) {
+        this.cursoAlumnosAusentesRecurrentes = cursoAlumnosAusentesRecurrentes;
+    }
+
     public ArrayList<String> getDniAlumnosEnGrupo() {
         return dniAlumnosEnGrupo;
     }
@@ -233,6 +269,8 @@ public class Global extends AppController {
     public void setAsistenciaAlumnosEnGrupo(ArrayList<String> asistenciaAlumnosEnGrupo) {
         this.asistenciaAlumnosEnGrupo = asistenciaAlumnosEnGrupo;
     }
+
+
 
     public String getFechaCurrent() {
         return fechaCurrent;

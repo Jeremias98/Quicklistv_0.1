@@ -78,6 +78,7 @@ public class Cursos extends Fragment  {
         pDialog.setCancelable(false);
 
     }
+
     public void iniciarDatos(){
 
         curso = new ArrayList<Curso>();
@@ -87,6 +88,7 @@ public class Cursos extends Fragment  {
         }
 
     }
+
     public CursoAdaptador adaptador;
 
     private void iniciarAdaptador(){

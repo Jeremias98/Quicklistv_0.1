@@ -54,9 +54,13 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
     private ArrayList<Integer> arrayIds;
     private ArrayList<String> arrayNames;
+    private ArrayList<String> arrayDni;
     private ArrayList<String> arrayTel;
     private ArrayList<String> arrayCel;
     private ArrayList<String> arrayEmail;
+    private ArrayList<String> arrayDireccion;
+    private ArrayList<String> arrayCurso;
+    private ArrayList<String> arrayNacionalidad;
 
     private ArrayList<Integer> idParam = new ArrayList<>();
     private ArrayList<Integer> assistParam = new ArrayList<>();
@@ -209,9 +213,13 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                             JSONArray jsonArray = new JSONArray(response);
                             arrayNames = new ArrayList<String>();
                             arrayIds = new ArrayList<Integer>();
+                            arrayDni = new ArrayList<String>();
                             arrayTel = new ArrayList<String>();
                             arrayCel = new ArrayList<String>();
                             arrayEmail = new ArrayList<String>();
+                            arrayDireccion = new ArrayList<String>();
+                            arrayNacionalidad = new ArrayList<String>();
+                            arrayCurso = new ArrayList<String>();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -219,25 +227,38 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                                 JSONArray alumnos_id = jsonObject.getJSONArray("id");
                                 JSONArray alumnos_name = jsonObject.getJSONArray("name");
+                                JSONArray alumnos_dni = jsonObject.getJSONArray("dni");
                                 JSONArray alumnos_tel = jsonObject.getJSONArray("phone");
                                 JSONArray alumnos_cel = jsonObject.getJSONArray("mobile");
                                 JSONArray alumnos_email = jsonObject.getJSONArray("email");
+                                JSONArray alumnos_direccion = jsonObject.getJSONArray("direccion");
+                                JSONArray alumnos_nacionalidad = jsonObject.getJSONArray("nacionalidad");
+                                JSONArray alumnos_curso = jsonObject.getJSONArray("curso");
 
                                 for (int j = 0; j < alumnos_id.length(); j++) {
                                     arrayIds.add(alumnos_id.getInt(j));
                                     arrayNames.add(alumnos_name.getString(j));
+                                    arrayDni.add(alumnos_dni.getString(j));
                                     arrayTel.add(alumnos_tel.getString(j));
                                     arrayCel.add(alumnos_cel.getString(j));
                                     arrayEmail.add(alumnos_email.getString(j));
+                                    arrayDireccion.add(alumnos_direccion.getString(j));
+                                    arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
+                                    arrayCurso.add(alumnos_curso.getString(j));
                                 }
 
                             }
 
                             globalData.setIdAlumnosAusentesRecurrentes(arrayIds);
                             globalData.setNombreAlumnosAusentesRecurrentes(arrayNames);
+                            globalData.setDniAlumnosAusentesRecurrentes(arrayDni);
                             globalData.setTelefonoAlumnosAusentesRecurrentes(arrayTel);
                             globalData.setCelularAlumnosAusentesRecurrentes(arrayCel);
                             globalData.setEmailAlumnosAusentesRecurrentes(arrayEmail);
+                            globalData.setDireccionAlumnosAusentesRecurrentes(arrayDireccion);
+                            globalData.setNacionalidadAlumnosAusentesRecurrentes(arrayNacionalidad);
+                            globalData.setCursoAlumnosAusentesRecurrentes(arrayCurso);
+
 
                             //Log.d("Pepe", arrayNames.toString());
                             Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();

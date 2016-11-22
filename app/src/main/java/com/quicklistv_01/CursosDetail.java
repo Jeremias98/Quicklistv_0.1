@@ -123,7 +123,7 @@ public class CursosDetail extends AppCompatActivity {
 
     //Creamos una instanancia de la aplicacion para que pueda ser invocada desde una clase.
     public static void createInstancealtern(Activity activity, Curso title, View view) {
-        Intent intent = getLaunchIntentaltern(activity,title);
+        Intent intent = getLaunchIntentaltern(activity, title);
         //activity.startActivity(intent);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, new Pair<View, String>(view.findViewById(R.id.tvCurso),
