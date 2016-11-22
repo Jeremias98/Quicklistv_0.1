@@ -211,15 +211,30 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                         try {
 
                             JSONArray jsonArray = new JSONArray(response);
-                            arrayNames = new ArrayList<String>();
-                            arrayIds = new ArrayList<Integer>();
-                            arrayDni = new ArrayList<String>();
-                            arrayTel = new ArrayList<String>();
-                            arrayCel = new ArrayList<String>();
-                            arrayEmail = new ArrayList<String>();
-                            arrayDireccion = new ArrayList<String>();
-                            arrayNacionalidad = new ArrayList<String>();
-                            arrayCurso = new ArrayList<String>();
+
+                            if (globalData.getIdAlumnosAusentesRecurrentes() == null) {
+                                arrayNames = new ArrayList<>();
+                                arrayIds = new ArrayList<>();
+                                arrayDni = new ArrayList<>();
+                                arrayTel = new ArrayList<>();
+                                arrayCel = new ArrayList<>();
+                                arrayEmail = new ArrayList<>();
+                                arrayDireccion = new ArrayList<>();
+                                arrayNacionalidad = new ArrayList<>();
+                                arrayCurso = new ArrayList<>();
+                            }
+                            else {
+                                arrayNames = globalData.getNombreAlumnosAusentesRecurrentes();
+                                arrayIds = globalData.getIdAlumnosAusentesRecurrentes();
+                                arrayDni = globalData.getDniAlumnosAusentesRecurrentes();
+                                arrayTel = globalData.getTelefonoAlumnosAusentesRecurrentes();
+                                arrayCel = globalData.getCelularAlumnosAusentesRecurrentes();
+                                arrayEmail = globalData.getEmailAlumnosAusentesRecurrentes();
+                                arrayDireccion = globalData.getDireccionAlumnosAusentesRecurrentes();
+                                arrayNacionalidad = globalData.getNacionalidadAlumnosAusentesRecurrentes();
+                                arrayCurso = globalData.getCursoAlumnosAusentesRecurrentes();
+                            }
+
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 

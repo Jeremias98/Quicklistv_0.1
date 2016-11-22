@@ -47,7 +47,7 @@ public class AlumnosDetail extends AppCompatActivity {
         tvMail.setText("Email: " + mail);
         tvDireccion.setText("Dirección: " + direc);
         tvDni.setText("DNI: " + dni);
-        tvNacionalidad.setText("Nacionalidad; " + nacionalidad);
+        tvNacionalidad.setText("Nacionalidad: " + nacionalidad);
 
 
 

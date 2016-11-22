@@ -95,7 +95,7 @@ public class Notificaciones extends AppCompatActivity {
                     alumnos.add(new NotificacionesClass(globalData.getIdAlumnosAusentesRecurrentes().get(i),
                             globalData.getNombreAlumnosAusentesRecurrentes().get(i),
                             globalData.getCursoAlumnosAusentesRecurrentes().get(i),
-                            globalData.getDniAlumnosAusentesRecurrentes().get(i), "3",
+                            globalData.getDniAlumnosAusentesRecurrentes().get(i), "4",
                             globalData.getEmailAlumnosAusentesRecurrentes().get(i),
                             globalData.getTelefonoAlumnosAusentesRecurrentes().get(i),
                             globalData.getDireccionAlumnosAusentesRecurrentes().get(i),
