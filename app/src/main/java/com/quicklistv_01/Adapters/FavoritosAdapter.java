@@ -3,6 +3,7 @@ package com.quicklistv_01.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.CursosFav;
@@ -151,6 +153,12 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
     @Override
     public void onItemClick(View view, int position) {
+
+        globalData.setIdCurrentGrupo(cursos.get(position).getId());
+        globalData.setNameCurrentGrupo(cursos.get(position).getNombre());
+
+        Log.d("Pepe",cursos.get(position).getId().toString());
+
         CursosDetail.createInstancealtern(
                 (Activity) context, cursos.get(position), view);
 

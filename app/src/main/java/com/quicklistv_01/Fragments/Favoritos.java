@@ -86,6 +86,7 @@ public class Favoritos extends Fragment {
         tvCurso = (TextView) rootView.findViewById(R.id.tvCurso);
         tvEstado = (TextView) rootView.findViewById(R.id.tvEstado);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+
         listarCursos();
 
         llm.setOrientation(LinearLayoutManager.VERTICAL);

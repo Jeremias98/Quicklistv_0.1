@@ -42,7 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public void close(){
         db.close();
     }
-    public ArrayList llenar(){
+
+    public ArrayList llenar() {
+
         ArrayList<String> lista = new ArrayList<>();
 
         SQLiteDatabase db = this.getWritableDatabase();
