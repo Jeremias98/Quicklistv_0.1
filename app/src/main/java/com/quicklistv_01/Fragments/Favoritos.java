@@ -49,6 +49,7 @@ public class Favoritos extends Fragment {
     RecyclerView listaCursos;
     private List<Curso> curso;
     ArrayList<String> c = new ArrayList<>();
+    ArrayList<Integer> d = new ArrayList<>();
     String a[] = {};
     // HTTP stuff
     private Global globalData;
@@ -87,6 +88,7 @@ public class Favoritos extends Fragment {
         tvEstado = (TextView) rootView.findViewById(R.id.tvEstado);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 
+
         listarCursos();
 
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -104,6 +106,7 @@ public class Favoritos extends Fragment {
         DBHelper helper = new DBHelper(getContext());
         helper.open();
         c = helper.llenar();
+        d = helper.llenarIds();
         if (c.size() != 0) {
             curso = new ArrayList<>();
 
@@ -112,9 +115,9 @@ public class Favoritos extends Fragment {
             }
 
             for (int i = 0; i < c.size(); i++) {
-                curso.add(new Curso(arrayIDs.get(i), c.get(i), arrayFav.get(i)));
+                curso.add(new Curso(d.get(i), c.get(i), arrayFav.get(i)));
             }
-        } else if(c.size() == 0) {
+        } else if (c.size() == 0) {
             tvEstado.setVisibility(View.VISIBLE);
         }
 

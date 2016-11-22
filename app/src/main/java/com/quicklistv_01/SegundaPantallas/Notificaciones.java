@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -55,6 +57,8 @@ public class Notificaciones extends AppCompatActivity {
     private ArrayList<Integer> arrayCursosId;
     private ArrayList<String> arrayCursosName;
 
+    private RelativeLayout rl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -63,6 +67,7 @@ public class Notificaciones extends AppCompatActivity {
         globalData = (Global) getApplicationContext();
         listaNotificaciones = (RecyclerView) findViewById(R.id.rvNotificaciones);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        rl = (RelativeLayout) findViewById(R.id.RlEstado);
         LinearLayoutManager llm = new LinearLayoutManager(Notificaciones.this);
 
         pDialog = new ProgressDialog(this);
@@ -83,20 +88,26 @@ public class Notificaciones extends AppCompatActivity {
     public void iniciarDatos() {
 
         alumnos = new ArrayList<>();
+            if (globalData.getIdAlumnosAusentesRecurrentes() != null) {
+                rl.setVisibility(View.INVISIBLE);
 
-        if (globalData.getIdAlumnosAusentesRecurrentes() != null) {
+                for (int i = 0; i < globalData.getIdAlumnosAusentesRecurrentes().size(); i++) {
+                    alumnos.add(new NotificacionesClass(globalData.getIdAlumnosAusentesRecurrentes().get(i),
+                            globalData.getNombreAlumnosAusentesRecurrentes().get(i),
+                            globalData.getCursoAlumnosAusentesRecurrentes().get(i),
+                            globalData.getDniAlumnosAusentesRecurrentes().get(i), "3",
+                            globalData.getEmailAlumnosAusentesRecurrentes().get(i),
+                            globalData.getTelefonoAlumnosAusentesRecurrentes().get(i),
+                            globalData.getDireccionAlumnosAusentesRecurrentes().get(i),
+                            globalData.getNacionalidadAlumnosAusentesRecurrentes().get(i)));
 
-            for (int i = 0; i < globalData.getIdAlumnosAusentesRecurrentes().size(); i++) {
-                alumnos.add(new NotificacionesClass(globalData.getIdAlumnosAusentesRecurrentes().get(i),
-                        globalData.getNombreAlumnosAusentesRecurrentes().get(i),
-                        globalData.getCursoAlumnosAusentesRecurrentes().get(i),
-                        globalData.getDniAlumnosAusentesRecurrentes().get(i), "3",
-                        globalData.getEmailAlumnosAusentesRecurrentes().get(i),
-                        globalData.getTelefonoAlumnosAusentesRecurrentes().get(i),
-                        globalData.getDireccionAlumnosAusentesRecurrentes().get(i),
-                        globalData.getNacionalidadAlumnosAusentesRecurrentes().get(i)));
+                }
             }
-        }
+
+        else if(globalData.getIdAlumnosAusentesRecurrentes() == null) {
+                rl.setVisibility(View.VISIBLE);
+            }
+
 
 
     }

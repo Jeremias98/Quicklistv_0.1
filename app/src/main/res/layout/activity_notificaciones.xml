@@ -4,18 +4,62 @@
     android:id="@+id/activity_notificaciones"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.quicklistv_01.SegundaPantallas.Notificaciones">
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="15dp"
         android:id="@+id/rvNotificaciones"
         android:divider="@drawable/barra"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/RlEstado"
+        android:visibility="invisible"
+        android:layout_marginTop="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/estadoCampana">
+
+            <ImageView
+                android:id="@+id/imgNoti"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/notificacition"
+                android:layout_marginLeft="106dp"
+                android:layout_marginStart="106dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/estadoTv"
+            android:layout_below="@+id/estadoCampana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:id="@+id/tvEstado"
+                android:text="No hay ninguna notificacion de Alumnos"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

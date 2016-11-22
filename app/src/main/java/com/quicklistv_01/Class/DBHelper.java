@@ -1,9 +1,11 @@
 package com.quicklistv_01.Class;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,22 @@ public class DBHelper extends SQLiteOpenHelper {
             }while (registro.moveToNext());
         }
         return lista;
+    }
+    public ArrayList llenarIds() {
+
+        ArrayList<Integer> ids = new ArrayList<>();
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM favoritos_cursos";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do {
+                ids.add(cursor.getInt(1));
+
+            }while (cursor.moveToNext());
+        }
+        return ids;
     }
 
 }
