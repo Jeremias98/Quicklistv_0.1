@@ -60,12 +60,14 @@ public class Favoritos extends Fragment {
     ArrayList<String> arrayNames;
     ArrayList<Integer> arrayIDs;
     ArrayList<Boolean> arrayFav;
+    TextView tvEstado;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         globalData = (Global) getActivity().getApplicationContext();
+
 
         // Progress dialog
         pDialog = new ProgressDialog(getActivity());
@@ -82,6 +84,7 @@ public class Favoritos extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_favoritos, container, false);
         listaCursos = (RecyclerView) rootView.findViewById(R.id.rvFavoritos);
         tvCurso = (TextView) rootView.findViewById(R.id.tvCurso);
+        tvEstado = (TextView) rootView.findViewById(R.id.tvEstado);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         listarCursos();
 
@@ -100,15 +103,20 @@ public class Favoritos extends Fragment {
         DBHelper helper = new DBHelper(getContext());
         helper.open();
         c = helper.llenar();
-        curso = new ArrayList<>();
+        if (c.size() != 0) {
+            curso = new ArrayList<>();
 
-        for (String nombre : a) {
-            c.add(nombre);
+            for (String nombre : a) {
+                c.add(nombre);
+            }
+
+            for (int i = 0; i < c.size(); i++) {
+                curso.add(new Curso(arrayIDs.get(i), c.get(i), arrayFav.get(i)));
+            }
+        } else if(c.size() == 0) {
+            tvEstado.setVisibility(View.VISIBLE);
         }
 
-        for (int i = 0; i < c.size(); i++) {
-            curso.add(new Curso(arrayIDs.get(i), c.get(i), arrayFav.get(i)));
-        }
         helper.close();
 
     }
@@ -121,10 +129,10 @@ public class Favoritos extends Fragment {
     }
 
 
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
 
-public interface OnFragmentInteractionListener {
-    void onFragmentInteraction(Uri uri);
-}
     private void listarCursos() {
 
         showpDialog();
@@ -155,8 +163,8 @@ public interface OnFragmentInteractionListener {
                                 for (int j = 0; j < id.length(); j++) {
                                     flag = false;
                                     // Verifico que no aparezcan los cursos que ya administra
-                                    for (int k = 0; k < globalData.getIdGrupos().size(); k++){
-                                        if (globalData.getIdGrupos().get(k) == id.getInt(j)){
+                                    for (int k = 0; k < globalData.getIdGrupos().size(); k++) {
+                                        if (globalData.getIdGrupos().get(k) == id.getInt(j)) {
                                             flag = true;
                                             break;
                                         }
@@ -167,8 +175,7 @@ public interface OnFragmentInteractionListener {
 
                                     if (flag) {
                                         arrayFav.add(true);
-                                    }
-                                    else if (!flag) {
+                                    } else if (!flag) {
                                         arrayFav.add(false);
 
                                     }
@@ -214,7 +221,7 @@ public interface OnFragmentInteractionListener {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton(posBtn,null);
+        builder.setPositiveButton(posBtn, null);
         builder.create();
         builder.show();
     }
