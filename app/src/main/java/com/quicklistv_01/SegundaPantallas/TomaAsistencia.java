@@ -251,15 +251,36 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                                 JSONArray alumnos_curso = jsonObject.getJSONArray("curso");
 
                                 for (int j = 0; j < alumnos_id.length(); j++) {
-                                    arrayIds.add(alumnos_id.getInt(j));
-                                    arrayNames.add(alumnos_name.getString(j));
-                                    arrayDni.add(alumnos_dni.getString(j));
-                                    arrayTel.add(alumnos_tel.getString(j));
-                                    arrayCel.add(alumnos_cel.getString(j));
-                                    arrayEmail.add(alumnos_email.getString(j));
-                                    arrayDireccion.add(alumnos_direccion.getString(j));
-                                    arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
-                                    arrayCurso.add(alumnos_curso.getString(j));
+
+                                    if (globalData.getIdAlumnosAusentesRecurrentes() != null) {
+
+                                        if (arrayIds.get(j) != globalData.getIdAlumnosAusentesRecurrentes().get(j)) {
+
+                                            arrayIds.add(alumnos_id.getInt(j));
+                                            arrayNames.add(alumnos_name.getString(j));
+                                            arrayDni.add(alumnos_dni.getString(j));
+                                            arrayTel.add(alumnos_tel.getString(j));
+                                            arrayCel.add(alumnos_cel.getString(j));
+                                            arrayEmail.add(alumnos_email.getString(j));
+                                            arrayDireccion.add(alumnos_direccion.getString(j));
+                                            arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
+                                            arrayCurso.add(alumnos_curso.getString(j));
+
+                                        }
+
+                                    }
+                                    else {
+                                        arrayIds.add(alumnos_id.getInt(j));
+                                        arrayNames.add(alumnos_name.getString(j));
+                                        arrayDni.add(alumnos_dni.getString(j));
+                                        arrayTel.add(alumnos_tel.getString(j));
+                                        arrayCel.add(alumnos_cel.getString(j));
+                                        arrayEmail.add(alumnos_email.getString(j));
+                                        arrayDireccion.add(alumnos_direccion.getString(j));
+                                        arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
+                                        arrayCurso.add(alumnos_curso.getString(j));
+                                    }
+
                                 }
 
                             }
