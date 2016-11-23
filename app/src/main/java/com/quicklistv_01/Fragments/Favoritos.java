@@ -108,6 +108,7 @@ public class Favoritos extends Fragment {
         c = helper.llenar();
         d = helper.llenarIds();
         if (c.size() != 0) {
+            tvEstado.setVisibility(View.INVISIBLE);
             curso = new ArrayList<>();
 
             for (String nombre : a) {
