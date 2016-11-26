@@ -181,11 +181,13 @@ public class Home extends AppCompatActivity
                                 drawer.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_cerrarsesion:
+                                logout();
                                 Intent intenta = new Intent(Home.this, Login.class);
                                 startActivity(intenta);
                                 drawer.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_salir:
+                                logout();
                                 finishAffinity();
                                 return true;
                         }
