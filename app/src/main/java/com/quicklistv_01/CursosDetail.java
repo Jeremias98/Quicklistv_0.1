@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,8 @@ public class CursosDetail extends AppCompatActivity {
 
     ImageButton btn_favo;
     private  String data;
-    TextView tomar, cambiar, crear, curso;
+    TextView curso;
+    LinearLayout tomar, cambiar, crear;
 
     // Variables globales
     private Global globalData;
@@ -45,9 +47,9 @@ public class CursosDetail extends AppCompatActivity {
         id = globalData.getIdCurrentGrupo();
         curso.setText(globalData.getNameCurrentGrupo());
         btn_favo = (ImageButton) findViewById(R.id.btn_favorito);
-        tomar = (TextView) findViewById(R.id.tomar);
-        cambiar = (TextView) findViewById(R.id.cambiar);
-        crear = (TextView) findViewById(R.id.crear);
+        tomar = (LinearLayout) findViewById(R.id.lyTomar);
+        cambiar = (LinearLayout) findViewById(R.id.lyMod);
+        crear = (LinearLayout) findViewById(R.id.lySub);
 
         tomar.setOnClickListener(new View.OnClickListener() {
             @Override
