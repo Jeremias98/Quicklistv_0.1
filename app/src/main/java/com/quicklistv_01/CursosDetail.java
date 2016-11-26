@@ -107,10 +107,15 @@ public class CursosDetail extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                ListaFavoritos db = new ListaFavoritos(getBaseContext());
-                data = globalData.getNameCurrentGrupo();
-                db.insertar(globalData.getIdCurrentGrupo(), globalData.getNameCurrentGrupo());
-                Toast.makeText(CursosDetail.this, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
+                try {
+                    ListaFavoritos db = new ListaFavoritos(getBaseContext());
+                    data = globalData.getNameCurrentGrupo();
+                    db.insertar(globalData.getIdCurrentGrupo(), globalData.getNameCurrentGrupo());
+                    Toast.makeText(CursosDetail.this, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
+                }
+                catch(Exception e){
+                    Toast.makeText(CursosDetail.this, "Hubo un error a agregar a favoritos.", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

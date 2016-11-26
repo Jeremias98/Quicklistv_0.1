@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final int DATASABE_VERSION = 1;
-    public static final String DATASABE_NAME = "favoritos.db";
+    public static final String DATASABE_NAME = "favs.db";
 
     public DBHelper(Context context) {
         super(context, DATASABE_NAME, null, DATASABE_VERSION);
@@ -28,8 +28,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + ListaFavoritos.FavoritosEntrada.TABLE_NAME + " ("
                 + ListaFavoritos.FavoritosEntrada.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + ListaFavoritos.FavoritosEntrada.ID_CURSO + " INTEGER NOT NULL, "
-                + ListaFavoritos.FavoritosEntrada.CURSO + " TEXT NOT NULL " + ")");
+                + ListaFavoritos.FavoritosEntrada.ID_CURSO + " INTEGER NOT NULL UNIQUE, "
+                + ListaFavoritos.FavoritosEntrada.CURSO + " TEXT NOT NULL UNIQUE " + ")");
 
     }
 

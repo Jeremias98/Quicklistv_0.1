@@ -3,7 +3,7 @@
     <EditTextPreference
         android:key="ip_config"
         android:title="Configuracion IP"
-        android:summary="Configurar direcciòn IP para realizar conexiòn"
+        android:summary="Configurar dirección IP para realizar conexión"
         android:dialogTitle="Ingrese IP">
 
     </EditTextPreference>
