@@ -82,7 +82,7 @@ public class CursosConsulta extends AppCompatActivity {
 
     private ProgressDialog pDialog;
 
-    public static String TAG = CursosDetail.class.getSimpleName();
+    public static String TAG = CursosConsulta.class.getSimpleName();
 
     ArrayList<String> arrayNames;
     ArrayList<Integer> arrayIDs;

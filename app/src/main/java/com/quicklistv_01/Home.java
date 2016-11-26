@@ -1,6 +1,8 @@
 package com.quicklistv_01;
 
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,10 +17,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
+import com.quicklistv_01.Class.AppController;
+import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.Fragments.Favoritos;
 import com.quicklistv_01.SegundaPantallas.Acerca;
@@ -27,8 +41,25 @@ import com.quicklistv_01.SegundaPantallas.CalendarioCursos;
 import com.quicklistv_01.SegundaPantallas.Notificaciones;
 import com.quicklistv_01.SegundaPantallas.Preferences;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
+
+    // TAG
+    public static String TAG = Home.class.getSimpleName();
+
+    // Variables globales
+    private Global globalData;
+
+    // Progress dialog
+    private ProgressDialog pDialog;
 
     //Boton de confirmacion de Salida
     @Override
@@ -41,6 +72,9 @@ public class Home extends AppCompatActivity
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Logout
+                logout();
+
                 finishAffinity();
 
             }
@@ -62,6 +96,15 @@ public class Home extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Global data
+        globalData = (Global) getApplicationContext();
+
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Espere...");
+        pDialog.setCancelable(false);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,6 +215,65 @@ public class Home extends AppCompatActivity
                 break;
 
         }
+    }
+
+    // Cerrar la sesion del user
+    private void logout() {
+
+        showpDialog();
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/LogoutService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                        hidepDialog();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                hidepDialog();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", globalData.getUserID().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    private void dialogError(String title, String message, String posBtn) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(posBtn,null);
+        builder.create();
+        builder.show();
     }
 
     @Override

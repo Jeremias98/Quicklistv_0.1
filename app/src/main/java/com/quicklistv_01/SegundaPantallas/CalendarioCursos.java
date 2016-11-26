@@ -55,8 +55,8 @@ public class CalendarioCursos extends AppCompatActivity {
                 String f = day+"-"+(month+1)+"-"+year;
                 intent.putExtra("fecha", f);
                 globalData.setFechaCurrent(f);
-                Toast.makeText(getApplicationContext(), f, Toast.LENGTH_SHORT)
-                        .show();
+                //Toast.makeText(getApplicationContext(), f, Toast.LENGTH_SHORT)
+                  //      .show();
                 startActivity(intent);
             }
         });

@@ -50,7 +50,9 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
 
         @Override
         public void onClick(View v) {
+
             listener.onItemClick(v, getAdapterPosition());
+
         }
     }
 
