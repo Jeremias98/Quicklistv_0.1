@@ -72,6 +72,7 @@ public class Home extends AppCompatActivity
             @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 // Logout
                 logout();
 
