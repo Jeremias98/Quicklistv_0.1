@@ -26,7 +26,7 @@ import java.util.List;
 
 
 public class ListaAsistencia extends AppCompatActivity {
-    RecyclerView rvLisa;
+    RecyclerView rvLista;
     private List<AlumnoAsistencia> alumnos;
     private Global globalData;
 
@@ -36,18 +36,20 @@ public class ListaAsistencia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_asistencia);
         globalData = (Global) getApplicationContext();
+        rvLista = (RecyclerView) findViewById(R.id.rvLista);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iniciarDatos();
         iniciarAdaptador();
         Intent i = getIntent();
         ActionBar actionBar = getSupportActionBar();
-        final String nombre = i.getStringExtra("nombre");
+        final String nombre = i.getStringExtra("Nombre");
         actionBar.setTitle(nombre);
 
         LinearLayoutManager llm = new LinearLayoutManager(ListaAsistencia.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rvLisa.setLayoutManager(llm);
-        rvLisa.addItemDecoration(new DividerItemDecoration(getBaseContext()));
-        rvLisa.addItemDecoration( new DividerItemDecoration(ListaAsistencia.this, R.drawable.barra));
+        rvLista.setLayoutManager(llm);
+        rvLista.addItemDecoration(new DividerItemDecoration(getBaseContext()));
+        rvLista.addItemDecoration( new DividerItemDecoration(ListaAsistencia.this, R.drawable.barra));
     }
 
 
@@ -55,6 +57,7 @@ public class ListaAsistencia extends AppCompatActivity {
 
         alumnos = new ArrayList<>();
         alumnos.add(new AlumnoAsistencia(1, "Aaron", "Tarde"));
+        alumnos.add(new AlumnoAsistencia(2, "Martin", "Presente"));
 
     }
 
@@ -62,7 +65,7 @@ public class ListaAsistencia extends AppCompatActivity {
 
     private void iniciarAdaptador(){
         adaptador = new ListaAsistenciaAdapter( alumnos, getApplicationContext());
-        rvLisa.setAdapter(adaptador);
+        rvLista.setAdapter(adaptador);
     }
 
 

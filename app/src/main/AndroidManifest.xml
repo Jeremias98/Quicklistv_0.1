@@ -135,7 +135,15 @@
                 android:value=".SegundaPantallas.Notificaciones" />
             >
         </activity>
-        <activity android:name=".SegundaPantallas.ListaAsistencia"></activity>
+        <activity
+            android:name=".SegundaPantallas.ListaAsistencia"
+            android:parentActivityName=".SegundaPantallas.CursosConsulta"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SegundaPantallas.CursosConsulta" />
+            >
+        </activity>
     </application>
 
 </manifest>

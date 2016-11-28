@@ -1,6 +1,7 @@
 package com.quicklistv_01.SegundaPantallas;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
@@ -44,6 +45,7 @@ import java.util.Map;
 public class CursosConsulta extends AppCompatActivity {
 
     private Intent intent;
+    private Context globalContext = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class CursosConsulta extends AppCompatActivity {
         pDialog = new ProgressDialog(CursosConsulta.this);
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
+        globalContext = CursosConsulta.this;
 
         listaCursos = (RecyclerView) findViewById(R.id.rvCursos);
         tvCurso = (TextView) findViewById(R.id.tvCurso);
@@ -102,7 +105,7 @@ public class CursosConsulta extends AppCompatActivity {
     public CursosConsultaAdapter adaptador;
 
     private void iniciarAdaptador(){
-        adaptador = new CursosConsultaAdapter(curso, getApplicationContext());
+        adaptador = new CursosConsultaAdapter(curso, globalContext);
         listaCursos.setAdapter(adaptador);
     }
 
