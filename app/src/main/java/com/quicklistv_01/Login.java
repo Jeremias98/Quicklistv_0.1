@@ -173,7 +173,7 @@ public class Login extends AppCompatActivity {
 
         showpDialog();
 
-        StringRequest req = new StringRequest(Request.Method.POST, relativeUrl + "/IngresarService",
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/IngresarService",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
