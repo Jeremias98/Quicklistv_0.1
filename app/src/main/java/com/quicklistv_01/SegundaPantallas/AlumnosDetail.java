@@ -15,7 +15,7 @@ import com.quicklistv_01.R;
 
 public class AlumnosDetail extends AppCompatActivity {
 
-    private TextView tvNombre, tvCurso, tvInan, tvTel, tvMail, tvDireccion,tvNacionalidad, tvDni;
+    private TextView tvNombre, tvCurso, tvTel, tvMail, tvDireccion,tvNacionalidad, tvDni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,6 @@ public class AlumnosDetail extends AppCompatActivity {
         final String nombre = i.getStringExtra("Nombre");
         final String ID = i.getStringExtra("ID");
         final String curso = i.getStringExtra("curso");
-        final String inasistencias = i.getStringExtra("inasistencias");
         final String tel = i.getStringExtra("tel");
         final String mail = i.getStringExtra("mail");
         final String direc = i.getStringExtra("direc");
@@ -35,14 +34,12 @@ public class AlumnosDetail extends AppCompatActivity {
         tvDni = (TextView) findViewById(R.id.tvDNI);
         tvNombre = (TextView) findViewById(R.id.tvNombre);
         tvCurso = (TextView) findViewById(R.id.tvcursos);
-        tvInan = (TextView) findViewById(R.id.tvInan);
         tvTel = (TextView) findViewById(R.id.tvTel);
         tvMail = (TextView) findViewById(R.id.tvMail);
         tvDireccion = (TextView) findViewById(R.id.tvDirec);
         tvNacionalidad = (TextView) findViewById(R.id.tvNacionalidad);
         tvNombre.setText(nombre);
         tvCurso.setText("Curso: " + curso);
-        tvInan.setText("Inasistencia: " + inasistencias);
         tvTel.setText("Telefono: " + tel);
         tvMail.setText("Email: " + mail);
         tvDireccion.setText("Dirección: " + direc);

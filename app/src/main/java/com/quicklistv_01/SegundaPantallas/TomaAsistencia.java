@@ -121,9 +121,17 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
             guardarAsistencia(i);
         }
 
-        revisarAusencias();
+        //revisarAusencias();
 
+        Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), globalData.getNombreAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
 
+        //Log.d("Pepe", arrayNames.toString());
+
+        Intent intent = new Intent(TomaAsistencia.this, CursosDetail.class);
+        intent.putExtra("Nombre", globalData.getNameCurrentGrupo().toString());
+        intent.putExtra("ID", globalData.getIdCurrentGrupo());
+        startActivity(intent);
         //dialogError("Información", "Se guardó la asistencia", "Aceptar");
 
     }

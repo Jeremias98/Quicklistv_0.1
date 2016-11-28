@@ -74,9 +74,7 @@ public class Notificaciones extends AppCompatActivity {
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
 
-        iniciarDatos();
-
-        iniciarAdaptador();
+        revisarAusencias();
 
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaNotificaciones.setLayoutManager(llm);
@@ -122,7 +120,7 @@ public class Notificaciones extends AppCompatActivity {
 
         showpDialog();
 
-        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/RevisarAsistenciaService",
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/RevisarTodasAsistenciasService",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -180,6 +178,10 @@ public class Notificaciones extends AppCompatActivity {
                             globalData.setNacionalidadAlumnosAusentesRecurrentes(arrayNacionalidad);
                             globalData.setCursoAlumnosAusentesRecurrentes(arrayCurso);
 
+                            iniciarDatos();
+
+                            iniciarAdaptador();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -194,16 +196,7 @@ public class Notificaciones extends AppCompatActivity {
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 hidepDialog();
             }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("id_grupo", "2");
-
-                return params;
-            }
-        };
+        });
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
