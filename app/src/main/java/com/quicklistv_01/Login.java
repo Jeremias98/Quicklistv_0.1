@@ -41,7 +41,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     Button btn_lg, btn_sg;
-    EditText edUser, edPass, ipAddress;
+    EditText edUser, edPass;
     CheckBox chRecordar, chIniciar;
 
     // TAG
@@ -73,7 +73,6 @@ public class Login extends AppCompatActivity {
 
         edUser= (EditText) findViewById(R.id.edUser);
         edPass= (EditText) findViewById(R.id.edPass);
-        ipAddress = (EditText) findViewById(R.id.ipAddress);
 
 
         //Obtengo la direccion IP del sharedpreferences
@@ -87,7 +86,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                relativeUrl = ipAddress.getText().toString();
+                relativeUrl = ip;
                 globalData.setUrl(relativeUrl);
 
                 ingresarUsuario();
@@ -238,7 +237,7 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(Login.this, Home.class);
                             globalData.setUserID(userId);
                             globalData.setUserName(userName);
-                            globalData.setUrl(ipAddress.getText().toString());
+                            globalData.setUrl(relativeUrl);
                             globalData.setIdGrupos(arrayIdGrupos);
                             globalData.setNameGrupos(arrayNameGrupos);
 
