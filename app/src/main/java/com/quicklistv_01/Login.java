@@ -213,7 +213,7 @@ public class Login extends AppCompatActivity {
                             }
 
                             Intent intent = new Intent(Login.this, Home.class);
-
+                            intent.putExtra("cuenta", userName);
                             globalData.setUserID(userId);
                             globalData.setUserName(userName);
                             globalData.setUrl(ipAddress.getText().toString());

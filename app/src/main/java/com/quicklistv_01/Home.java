@@ -44,6 +44,7 @@ import com.quicklistv_01.SegundaPantallas.Preferences;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ public class Home extends AppCompatActivity
 
     // Progress dialog
     private ProgressDialog pDialog;
+    TextView usuario;
 
     //Boton de confirmacion de Salida
     @Override
@@ -106,6 +108,7 @@ public class Home extends AppCompatActivity
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,6 +121,11 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
+            View header=navigationView.getHeaderView(0);
+            Intent i = getIntent();
+            final String cuenta = i.getStringExtra("cuenta");
+            TextView usuario = (TextView)header.findViewById(R.id.userName);
+            usuario.setText(cuenta);
         }
 
         final Thread.UncaughtExceptionHandler oldHandler =
@@ -149,6 +157,9 @@ public class Home extends AppCompatActivity
         setupNavigationDrawerContent(navigationView);
         //Seteamos el primer framgment como predeterminado al momento de abrir la activity
         setFragment(1);
+        //Usuario
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
