@@ -124,17 +124,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SegundaPantallas.Alumnos" />
-
         </activity>
-        <activity android:name=".SegundaPantallas.AlumnosDetail"
+        <activity
+            android:name=".SegundaPantallas.AlumnosDetail"
             android:label="Datos del alumno"
             android:parentActivityName=".SegundaPantallas.Notificaciones"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SegundaPantallas.Notificaciones" />>
-
+                android:value=".SegundaPantallas.Notificaciones" />
+            >
         </activity>
+        <activity android:name=".SegundaPantallas.ListaAsistencia"></activity>
     </application>
 
 </manifest>

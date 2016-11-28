@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
 import android.view.View;
@@ -39,9 +40,11 @@ public class CursosDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos_detail);
 
+
         globalData = (Global) getApplicationContext();
 
         Intent i = getIntent();
+
         curso =(TextView) findViewById(R.id.curso);
         final String name = i.getStringExtra("Nombre");
         id = globalData.getIdCurrentGrupo();

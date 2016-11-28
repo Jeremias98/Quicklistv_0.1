@@ -1,7 +1,6 @@
 package com.quicklistv_01.SegundaPantallas;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.quicklistv_01.Adapters.CursoAdaptador;
+import com.quicklistv_01.Adapters.CursosConsultaAdapter;
 import com.quicklistv_01.Class.AppController;
 import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.DividerItemDecoration;
@@ -45,29 +45,11 @@ public class CursosConsulta extends AppCompatActivity {
 
     private Intent intent;
 
-    public static Context context;
-
-    TextView tvCurso;
-    RecyclerView listaCursos;
-    private List<Curso> curso;
-
-    // HTTP stuff
-    private Global globalData;
-
-    private ProgressDialog pDialog;
-
-    public static String TAG = CursosConsulta.class.getSimpleName();
-
-    ArrayList<String> arrayNames;
-    ArrayList<Integer> arrayIDs;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cursos_consulta);
-
         globalData = (Global) getApplicationContext();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
@@ -92,6 +74,21 @@ public class CursosConsulta extends AppCompatActivity {
         listaCursos.addItemDecoration( new DividerItemDecoration(CursosConsulta.this, R.drawable.barra));
     }
 
+    TextView tvCurso;
+    RecyclerView listaCursos;
+    private List<Curso> curso;
+
+    // HTTP stuff
+    private Global globalData;
+
+    private ProgressDialog pDialog;
+
+    public static String TAG = CursosConsulta.class.getSimpleName();
+
+    ArrayList<String> arrayNames;
+    ArrayList<Integer> arrayIDs;
+    ArrayList<Boolean> arrayFav;
+
 
     public void iniciarDatos(){
 
@@ -102,11 +99,10 @@ public class CursosConsulta extends AppCompatActivity {
         }
 
     }
-    public CursoAdaptador adaptador;
+    public CursosConsultaAdapter adaptador;
 
     private void iniciarAdaptador(){
-        context = getApplicationContext();
-        adaptador = new CursoAdaptador(curso, context);
+        adaptador = new CursosConsultaAdapter(curso, getApplicationContext());
         listaCursos.setAdapter(adaptador);
     }
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvAlumno"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alumno"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="17sp"
+            android:layout_gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/tvAsistencia"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Presente"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="17sp"
+            android:layout_gravity="center_vertical"
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
