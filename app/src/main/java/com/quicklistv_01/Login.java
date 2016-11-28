@@ -10,11 +10,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,6 +27,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.quicklistv_01.Class.AppController;
 import com.quicklistv_01.Class.Global;
+import com.quicklistv_01.SegundaPantallas.Notificaciones;
+import com.quicklistv_01.SegundaPantallas.Preferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,8 +58,6 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         // Global data
         globalData = (Global) getApplicationContext();
 
@@ -72,6 +74,12 @@ public class Login extends AppCompatActivity {
         edUser= (EditText) findViewById(R.id.edUser);
         edPass= (EditText) findViewById(R.id.edPass);
         ipAddress = (EditText) findViewById(R.id.ipAddress);
+
+
+        //Obtengo la direccion IP del sharedpreferences
+        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
+        final String ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
+        Log.d(TAG , "Direccion ip: " + ip);
 
         btn_lg = (Button) findViewById(R.id.btn_login);
         btn_sg = (Button) findViewById(R.id.btn_registrar);
@@ -119,6 +127,23 @@ public class Login extends AppCompatActivity {
         CargarDatos();
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_config_login, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.ajustes) {
+            Intent intent = new Intent(Login.this, Preferences.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     public void Guardar() {
 
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
@@ -162,10 +187,6 @@ public class Login extends AppCompatActivity {
         chIniciar.setChecked(preferences.getBoolean("recordar", false));
         edPass.setText(preferences.getString("pass", ""));
         edUser.setText(preferences.getString("user", ""));
-    }
-    public void run(){
-        Intent intento = new Intent(Login.this, Home.class);
-        startActivity(intento);
     }
 
     // JSON stuff

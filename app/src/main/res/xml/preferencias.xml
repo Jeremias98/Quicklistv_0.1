@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout="@layout/cursos_list">
     <EditTextPreference
         android:key="ip_config"
-        android:title="Configuracion IP"
+        android:title="Configuración IP"
         android:summary="Configurar dirección IP para realizar conexión"
         android:dialogTitle="Ingrese IP">
 
     </EditTextPreference>
+    <EditTextPreference
+        android:key="puerto"
+        android:title="Puerto"
+        android:summary="Indique el puerto para realizar la conexión al servidor"
+        android:dialogTitle="Ingrese el puerto">
+
+
+    </EditTextPreference>
+    <Preference
+        android:selectable="false"
+        android:enabled="true"
+        android:key="example_key"
+        android:title=""
+        android:summary="Estos cambios necesitan un reinicio en la aplicación" />
+
     <PreferenceCategory android:key="acerca"
         android:title="Acerca de QuickList">
         <Preference
-            android:title="Versión de la Aplicación : 0.7.2"
+            android:title="Versión de la Aplicación : 0.9.1"
            >
 
         </Preference>
