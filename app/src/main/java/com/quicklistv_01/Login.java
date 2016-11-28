@@ -74,8 +74,10 @@ public class Login extends AppCompatActivity {
         edUser= (EditText) findViewById(R.id.edUser);
         edPass= (EditText) findViewById(R.id.edPass);
         ipAddress = (EditText) findViewById(R.id.ipAddress);
-        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
 
+
+        //Obtengo la direccion IP del sharedpreferences
+        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
         final String ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
         Log.d(TAG , "Direccion ip: " + ip);
 
