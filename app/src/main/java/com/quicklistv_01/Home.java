@@ -3,8 +3,10 @@ package com.quicklistv_01;
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -120,10 +122,10 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
+            SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
             setupNavigationDrawerContent(navigationView);
             View header=navigationView.getHeaderView(0);
-            Intent i = getIntent();
-            final String cuenta = i.getStringExtra("cuenta");
+            final String cuenta = preferences.getString("nombre", "");
             TextView usuario = (TextView)header.findViewById(R.id.userName);
             usuario.setText(cuenta);
         }

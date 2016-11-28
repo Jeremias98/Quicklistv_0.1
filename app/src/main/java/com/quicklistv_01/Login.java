@@ -123,10 +123,12 @@ public class Login extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor =  preferences.edit();
+        String nombre = edUser.getText().toString();
+        editor.putString("nombre", nombre);
 
         if (chRecordar.isChecked()){
             boolean valor = chRecordar.isChecked();
-            String nombre = edUser.getText().toString();
+
             String pass = edPass.getText().toString();
             editor.putString("user", nombre);
             editor.putString("pass", pass);
@@ -213,7 +215,6 @@ public class Login extends AppCompatActivity {
                             }
 
                             Intent intent = new Intent(Login.this, Home.class);
-                            intent.putExtra("cuenta", userName);
                             globalData.setUserID(userId);
                             globalData.setUserName(userName);
                             globalData.setUrl(ipAddress.getText().toString());
