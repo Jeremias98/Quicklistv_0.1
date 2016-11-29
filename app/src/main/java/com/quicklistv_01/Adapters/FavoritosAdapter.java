@@ -134,7 +134,8 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                     public boolean onMenuItemClick(MenuItem item) {
                         ListaFavoritos db = new ListaFavoritos(context);
                         db.eliminar(data);
-                        updateList(cursos);
+                        Toast.makeText(context, "Se elimino de favoritos. Deslice la pantalla hacia abajo para actualizar", Toast.LENGTH_LONG).show();
+
                         return false;
                     }
                 });
@@ -148,10 +149,6 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                     }
                 });
 
-    }
-    public void updateList(List<Curso> data) {
-        cursos = data;
-        notifyDataSetChanged();
     }
 
 
