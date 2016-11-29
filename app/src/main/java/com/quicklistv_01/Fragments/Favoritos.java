@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Favoritos extends Fragment {
+
     public static Context context;
 
     public Favoritos() {
