@@ -166,7 +166,7 @@ public class CursosConsulta extends AppCompatActivity {
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                String fecha = intent.getExtras().getString("fecha");
+                String fecha = globalData.getFechaCurrent();
 
                 params.put("fecha", fecha);
 

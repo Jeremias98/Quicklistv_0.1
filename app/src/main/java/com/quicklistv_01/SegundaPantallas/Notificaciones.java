@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Notificaciones extends AppCompatActivity {
+
     private List<NotificacionesClass> alumnos;
     RecyclerView listaNotificaciones;
     public static String TAG = Notificaciones.class.getSimpleName();
@@ -86,25 +87,27 @@ public class Notificaciones extends AppCompatActivity {
     public void iniciarDatos() {
 
         alumnos = new ArrayList<>();
-            if (globalData.getIdAlumnosAusentesRecurrentes() != null) {
-                rl.setVisibility(View.INVISIBLE);
 
-                for (int i = 0; i < globalData.getIdAlumnosAusentesRecurrentes().size(); i++) {
-                    alumnos.add(new NotificacionesClass(globalData.getIdAlumnosAusentesRecurrentes().get(i),
-                            globalData.getNombreAlumnosAusentesRecurrentes().get(i),
-                            globalData.getCursoAlumnosAusentesRecurrentes().get(i),
-                            globalData.getDniAlumnosAusentesRecurrentes().get(i), "4",
-                            globalData.getEmailAlumnosAusentesRecurrentes().get(i),
-                            globalData.getTelefonoAlumnosAusentesRecurrentes().get(i),
-                            globalData.getDireccionAlumnosAusentesRecurrentes().get(i),
-                            globalData.getNacionalidadAlumnosAusentesRecurrentes().get(i)));
+        if (globalData.getIdAlumnosAusentesRecurrentes().size() != 0) {
 
-                }
+            rl.setVisibility(View.INVISIBLE);
+
+            for (int i = 0; i < globalData.getIdAlumnosAusentesRecurrentes().size(); i++) {
+                alumnos.add(new NotificacionesClass(globalData.getIdAlumnosAusentesRecurrentes().get(i),
+                        globalData.getNombreAlumnosAusentesRecurrentes().get(i),
+                        globalData.getCursoAlumnosAusentesRecurrentes().get(i),
+                        globalData.getDniAlumnosAusentesRecurrentes().get(i), "4",
+                        globalData.getEmailAlumnosAusentesRecurrentes().get(i),
+                        globalData.getTelefonoAlumnosAusentesRecurrentes().get(i),
+                        globalData.getDireccionAlumnosAusentesRecurrentes().get(i),
+                        globalData.getNacionalidadAlumnosAusentesRecurrentes().get(i)));
+
             }
+        }
 
-        else if(globalData.getIdAlumnosAusentesRecurrentes() == null) {
-                rl.setVisibility(View.VISIBLE);
-            }
+        else {
+            rl.setVisibility(View.VISIBLE);
+        }
 
 
 
