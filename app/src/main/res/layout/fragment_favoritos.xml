@@ -3,13 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.Favoritos">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvFavoritos"
-        android:divider="@drawable/barra"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
     <TextView
         android:id="@+id/tvEstado"
         android:layout_gravity="center"
@@ -18,5 +12,18 @@
         android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvFavoritos"
+            android:divider="@drawable/barra"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

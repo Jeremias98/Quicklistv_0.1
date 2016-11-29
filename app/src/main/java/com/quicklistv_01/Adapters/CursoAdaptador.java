@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,6 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     private final Context context;
     // Variables globales
     private Global globalData;
-    private String data;
 
     public static class cursosViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
@@ -132,15 +132,12 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
 
-                        try {
+
                             ListaFavoritos db = new ListaFavoritos(context);
-                            data = globalData.getNameCurrentGrupo();
-                            db.insertar(globalData.getIdCurrentGrupo(), globalData.getNameCurrentGrupo());
+                            db.insertar(cursos.get(position).getId(),cursos.get(position).getNombre());
                             Toast.makeText(context, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
-                        }
-                        catch(Exception e){
-                            Toast.makeText(context, "Hubo un error a agregar a favoritos.", Toast.LENGTH_SHORT).show();
-                        }
+
+
 
                         return false;
                     }

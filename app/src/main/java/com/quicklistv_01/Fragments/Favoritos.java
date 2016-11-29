@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,6 +62,7 @@ public class Favoritos extends Fragment {
     ArrayList<Integer> arrayIDs;
     ArrayList<Boolean> arrayFav;
     TextView tvEstado;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     @Override
@@ -73,6 +75,7 @@ public class Favoritos extends Fragment {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
+
 
 
     }
@@ -96,6 +99,15 @@ public class Favoritos extends Fragment {
         listaCursos.setItemAnimator(new DefaultItemAnimator());
         listaCursos.addItemDecoration(new DividerItemDecoration(getContext()));
         listaCursos.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.barra));
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                iniciarDatos();
+                iniciarAdaptador();
+                refreshItems();
+            }
+        });
 
         return rootView;
     }
@@ -107,6 +119,7 @@ public class Favoritos extends Fragment {
         c = helper.llenar();
         d = helper.llenarIds();
         if (c.size() != 0) {
+            listaCursos.setVisibility(View.VISIBLE);
             tvEstado.setVisibility(View.INVISIBLE);
             curso = new ArrayList<>();
 
@@ -119,6 +132,7 @@ public class Favoritos extends Fragment {
             }
         } else if (c.size() == 0) {
             tvEstado.setVisibility(View.VISIBLE);
+            listaCursos.setVisibility(View.INVISIBLE);
         }
 
         helper.close();
@@ -229,5 +243,18 @@ public class Favoritos extends Fragment {
         builder.setPositiveButton(posBtn, null);
         builder.create();
         builder.show();
+    }
+
+
+    void refreshItems() {
+
+        iniciarDatos();
+
+        onItemsLoadComplete();
+    }
+
+    void onItemsLoadComplete() {
+        adaptador.notifyDataSetChanged();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

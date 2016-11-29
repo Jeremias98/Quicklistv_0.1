@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
     Button btn_lg, btn_sg;
     EditText edUser, edPass;
     CheckBox chRecordar, chIniciar;
+    private String ip="";
 
     // TAG
     public static String TAG = CursosDetail.class.getSimpleName();
@@ -69,15 +70,13 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         chRecordar = (CheckBox) findViewById(R.id.cbRecordar);
-        chIniciar = (CheckBox) findViewById(R.id.chIniciar);
 
         edUser= (EditText) findViewById(R.id.edUser);
         edPass= (EditText) findViewById(R.id.edPass);
 
 
         //Obtengo la direccion IP del sharedpreferences
-        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
-        final String ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
+
         Log.d(TAG , "Direccion ip: " + ip);
 
         btn_lg = (Button) findViewById(R.id.btn_login);
@@ -86,8 +85,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                relativeUrl = ip;
-                globalData.setUrl(relativeUrl);
+
 
                 ingresarUsuario();
 
@@ -164,32 +162,22 @@ public class Login extends AppCompatActivity {
             editor.putString("pass", "");
             editor.putBoolean("checked", false);
         }
-        if(chIniciar.isChecked()){
-            boolean status = chIniciar.isChecked();
-            editor.putBoolean("recordar",status);
-            Intent intent = new Intent(this, Home.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
 
-        }
-        else{
-            editor.putBoolean("recordar", false);
-
-        }
         editor.commit();
     }
     public void CargarDatos(){
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         chRecordar.setChecked(preferences.getBoolean("checked", false));
-        chIniciar.setChecked(preferences.getBoolean("recordar", false));
         edPass.setText(preferences.getString("pass", ""));
         edUser.setText(preferences.getString("user", ""));
     }
 
     // JSON stuff
     private void ingresarUsuario() {
+        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
+        ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
+        relativeUrl = ip;
+        globalData.setUrl(relativeUrl);
 
         showpDialog();
 

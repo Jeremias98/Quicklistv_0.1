@@ -97,15 +97,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         />
-    <CheckBox
-        android:id="@+id/chIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesion Automaticamente"
-        android:layout_below="@+id/cbRecordar"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        />
+
 
 
 
