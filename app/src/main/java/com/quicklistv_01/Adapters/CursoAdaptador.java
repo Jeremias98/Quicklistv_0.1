@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.quicklistv_01.Class.Curso;
 import com.quicklistv_01.Class.Global;
+import com.quicklistv_01.Class.ListaFavoritos;
 import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.R;
 import com.quicklistv_01.SegundaPantallas.Alumnos;
@@ -30,6 +32,7 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
     private final Context context;
     // Variables globales
     private Global globalData;
+    private String data;
 
     public static class cursosViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
@@ -124,15 +127,24 @@ public class CursoAdaptador extends RecyclerView.Adapter<CursoAdaptador.cursosVi
                         return false;
                     }
                 });
-        /*menu.add("Agregar a favoritos")
+        menu.add("Agregar a favoritos")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Intent intent = new Intent();
+
+                        try {
+                            ListaFavoritos db = new ListaFavoritos(context);
+                            data = globalData.getNameCurrentGrupo();
+                            db.insertar(globalData.getIdCurrentGrupo(), globalData.getNameCurrentGrupo());
+                            Toast.makeText(context, "Se agregó a favoritos", Toast.LENGTH_SHORT).show();
+                        }
+                        catch(Exception e){
+                            Toast.makeText(context, "Hubo un error a agregar a favoritos.", Toast.LENGTH_SHORT).show();
+                        }
 
                         return false;
                     }
-                });*/
+                });
         menu.add("Ver subgrupos")
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override

@@ -125,8 +125,6 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
 
                         Alumnos.createInstancealtern(
                                 (Activity) context);
-                        //TomaAsistencia.createInstancealtern(
-                        //      (Activity) context);
                         return false;
                     }
                 });
