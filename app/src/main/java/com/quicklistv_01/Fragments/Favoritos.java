@@ -24,11 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.quicklistv_01.Adapters.FavoritosAdapter;
 import com.quicklistv_01.Class.AppController;
 import com.quicklistv_01.Class.Curso;
-import com.quicklistv_01.Class.CursosFav;
 import com.quicklistv_01.Class.DBHelper;
 import com.quicklistv_01.Class.DividerItemDecoration;
 import com.quicklistv_01.Class.Global;
-import com.quicklistv_01.CursosDetail;
 import com.quicklistv_01.R;
 
 import org.json.JSONArray;
@@ -130,6 +128,7 @@ public class Favoritos extends Fragment {
 
         adaptador = new FavoritosAdapter(curso, getContext());
         listaCursos.setAdapter(adaptador);
+        adaptador.notifyDataSetChanged();
 
     }
 
@@ -230,6 +229,4 @@ public class Favoritos extends Fragment {
         builder.create();
         builder.show();
     }
-
-
 }

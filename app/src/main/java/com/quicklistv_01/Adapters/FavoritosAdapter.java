@@ -24,6 +24,7 @@ import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.TomaAsistencia;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -135,6 +136,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                     public boolean onMenuItemClick(MenuItem item) {
                         ListaFavoritos db = new ListaFavoritos(context);
                         db.eliminar(data);
+                        updateList(cursos);
                         return false;
                     }
                 });
@@ -148,6 +150,10 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.favo
                     }
                 });
 
+    }
+    public void updateList(List<Curso> data) {
+        cursos = data;
+        notifyDataSetChanged();
     }
 
 
