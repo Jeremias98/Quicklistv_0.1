@@ -172,7 +172,7 @@ public class ListaAsistencia extends AppCompatActivity {
                 //Integer id = intent.getExtras().getInt("ID");
 
                 params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
-                params.put("fecha", "28-11-2016");
+                params.put("fecha", globalData.getFechaCurrent());
 
                 return params;
             }
