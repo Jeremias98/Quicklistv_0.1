@@ -144,6 +144,13 @@
                 android:value=".SegundaPantallas.CursosConsulta" />
             >
         </activity>
+        <activity android:name=".SegundaPantallas.CalendarioModificaciones"
+            android:parentActivityName=".CursosDetail"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CursosDetail" />
+        </activity>
     </application>
 
 </manifest>

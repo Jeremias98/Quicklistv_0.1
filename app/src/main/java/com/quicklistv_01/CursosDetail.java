@@ -21,6 +21,7 @@ import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Class.ListaFavoritos;
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.SegundaPantallas.Alumnos;
+import com.quicklistv_01.SegundaPantallas.CalendarioModificaciones;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 
 public class CursosDetail extends AppCompatActivity {
@@ -94,7 +95,8 @@ public class CursosDetail extends AppCompatActivity {
         cambiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CursosDetail.this, Modificar.class);
+                Intent intent = new Intent(CursosDetail.this, CalendarioModificaciones.class);
+                intent.putExtra("Curso", name);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(CursosDetail.this, new Pair<View, String>(findViewById(R.id.tomar),
                             "trans_animation"));
