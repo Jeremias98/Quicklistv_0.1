@@ -16,5 +16,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="start">Iniciar</string>
     <string name="next">Siguiente</string>
+    <string name="menu_prompt_title">Texto</string>
+    <string name="menu_prompt_description">Descripcion</string>
 
 </resources>

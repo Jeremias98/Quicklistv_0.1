@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,14 +13,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,9 @@ import com.quicklistv_01.SegundaPantallas.Notificaciones;
 import com.quicklistv_01.SegundaPantallas.Preferences;
 import java.util.HashMap;
 import java.util.Map;
+
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
@@ -152,13 +156,18 @@ public class Home extends AppCompatActivity
 
         setupNavigationDrawerContent(navigationView);
         setFragment(1);
+        //drawer.openDrawer(Gravity.LEFT);
+
+
 
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_alumnos_drawer, menu);
+
         return true;
+
     }
 
     @Override
