@@ -1,12 +1,13 @@
 package com.quicklistv_01;
 
 import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,23 +38,16 @@ import com.quicklistv_01.Class.Global;
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.Fragments.Favoritos;
 import com.quicklistv_01.SegundaPantallas.Acerca;
-import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.CalendarioCursos;
 import com.quicklistv_01.SegundaPantallas.Notificaciones;
 import com.quicklistv_01.SegundaPantallas.Preferences;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
 
+    private static final String SHOWCASE_ID = "";
     // TAG
     public static String TAG = Home.class.getSimpleName();
 
@@ -102,18 +95,19 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // Global data
         globalData = (Global) getApplicationContext();
+
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -157,10 +151,7 @@ public class Home extends AppCompatActivity
                 });
 
         setupNavigationDrawerContent(navigationView);
-        //Seteamos el primer framgment como predeterminado al momento de abrir la activity
         setFragment(1);
-        //Usuario
-
 
     }
     @Override
@@ -264,6 +255,7 @@ public class Home extends AppCompatActivity
 
         }
     }
+
 
     // Cerrar la sesion del user
     private void logout() {
