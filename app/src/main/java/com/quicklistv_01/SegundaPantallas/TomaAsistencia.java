@@ -46,6 +46,10 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
     // HTTP stuff
     public static String TAG = TomaAsistencia.class.getSimpleName();
 
+    java.util.Date dt = new java.util.Date();
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+    private String currentDateTimeString = sdf.format(dt);
+
     // Variables globales
     private Global globalData;
 
@@ -61,6 +65,8 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
     private ArrayList<String> arrayDireccion;
     private ArrayList<String> arrayCurso;
     private ArrayList<String> arrayNacionalidad;
+
+    private String ultimaFecha;
 
     private ArrayList<Integer> idParam = new ArrayList<>();
     private ArrayList<Integer> assistParam = new ArrayList<>();
@@ -84,6 +90,8 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
+
+        ultimaTomaAsistencia();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -115,15 +123,33 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         List<Alumno> alumnos;
         alumnos = adapter.getAlumnosAsistencia();
 
-        for (int i = 0; i < alumnos.size(); i++) {
-            idParam.add(alumnos.get(i).getId());
-            assistParam.add(alumnos.get(i).getAsistencia());
-            guardarAsistencia(i);
-        }
+        if (ultimaFecha != null) {
 
+            if (ultimaFecha.equals(currentDateTimeString)) {
+                for (int i = 0; i < alumnos.size(); i++) {
+                    idParam.add(alumnos.get(i).getId());
+                    assistParam.add(alumnos.get(i).getAsistencia());
+                    modificarAsistencia(i);
+                }
+            }
+            else {
+                for (int i = 0; i < alumnos.size(); i++) {
+                    idParam.add(alumnos.get(i).getId());
+                    assistParam.add(alumnos.get(i).getAsistencia());
+                    guardarAsistencia(i);
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < alumnos.size(); i++) {
+                idParam.add(alumnos.get(i).getId());
+                assistParam.add(alumnos.get(i).getAsistencia());
+                guardarAsistencia(i);
+            }
+        }
         //revisarAusencias();
 
-        Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Se tomó asistencia correctamente", Toast.LENGTH_SHORT).show();
         //Toast.makeText(getApplicationContext(), globalData.getNombreAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
 
         //Log.d("Pepe", arrayNames.toString());
@@ -181,12 +207,10 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
                 Map<String, String> params = new HashMap<String, String>();
 
-                java.util.Date dt = new java.util.Date();
-                java.text.SimpleDateFormat sdf =
-                        new java.text.SimpleDateFormat("dd-MM-yyyy");
+
 
                 //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                String currentDateTimeString = sdf.format(dt);
+
 
                 Log.d("Dato", idParam.toString());
 
@@ -195,6 +219,129 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                 params.put("fecha", currentDateTimeString);
                 params.put("grupo", globalData.getIdCurrentGrupo().toString());
                 params.put("cuenta", globalData.getUserID().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    private void modificarAsistencia(final int i) {
+
+        showpDialog();
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/ModificarAsistenciaService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                        try {
+
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                if(jsonObject.getBoolean("success")) {
+
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        hidepDialog();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                hidepDialog();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+
+
+                //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
+                Log.d("Dato", idParam.toString());
+
+                params.put("id_alumnos", idParam.get(i).toString());
+                params.put("assist_alumnos", assistParam.get(i).toString());
+                params.put("fecha", currentDateTimeString);
+                params.put("grupo", globalData.getIdCurrentGrupo().toString());
+                params.put("cuenta", globalData.getUserID().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    private void ultimaTomaAsistencia() {
+
+        showpDialog();
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/UltimaTomaAsistenciaService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                        try {
+
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                ultimaFecha = jsonObject.getString("fecha");
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        hidepDialog();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                hidepDialog();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                Log.d("Dato", idParam.toString());
+
+                params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
 
                 return params;
             }
