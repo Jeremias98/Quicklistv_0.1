@@ -31,5 +31,4 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'uk.co.samuelwall:material-tap-target-prompt:1.6.2'
 }

@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Selection;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -45,13 +46,10 @@ import com.quicklistv_01.SegundaPantallas.Preferences;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
 
-    private static final String SHOWCASE_ID = "";
     // TAG
     public static String TAG = Home.class.getSimpleName();
 
@@ -156,6 +154,8 @@ public class Home extends AppCompatActivity
 
         setupNavigationDrawerContent(navigationView);
         setFragment(1);
+
+
         //drawer.openDrawer(Gravity.LEFT);
 
 
