@@ -67,8 +67,16 @@ public class TomaAlumno extends Fragment {
                 new java.text.SimpleDateFormat("dd-MM-yyyy");
         String currentDateTimeString = sdf.format(dt);
         //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        ((TextView) rootView.findViewById(R.id.fecha)).setText(
-                currentDateTimeString);
+
+        if (globalData.isModificar()) {
+            ((TextView) rootView.findViewById(R.id.fecha)).setText(
+                    globalData.getFechaCurrent());
+        }
+        else {
+            ((TextView) rootView.findViewById(R.id.fecha)).setText(
+                    currentDateTimeString);
+        }
+
 
         String grupoActual = globalData.getNameCurrentGrupo();
         ((TextView) rootView.findViewById(R.id.curso)).setText(

@@ -123,7 +123,18 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
         List<Alumno> alumnos;
         alumnos = adapter.getAlumnosAsistencia();
 
-        if (ultimaFecha != null) {
+        if (globalData.isModificar()) {
+
+            for (int i = 0; i < alumnos.size(); i++) {
+                idParam.add(alumnos.get(i).getId());
+                assistParam.add(alumnos.get(i).getAsistencia());
+                modificarAsistenciaPorFecha(i);
+            }
+
+            globalData.setModificar(false);
+
+        }
+        else if (ultimaFecha != null) {
 
             if (ultimaFecha.equals(currentDateTimeString)) {
                 for (int i = 0; i < alumnos.size(); i++) {
@@ -296,6 +307,73 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
 
     }
 
+    private void modificarAsistenciaPorFecha(final int i) {
+
+        showpDialog();
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/ModificarAsistenciaService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                        try {
+
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
+
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                if(jsonObject.getBoolean("success")) {
+
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        hidepDialog();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                hidepDialog();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+
+
+                //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+
+                Log.d("Dato", idParam.toString());
+
+                params.put("id_alumnos", idParam.get(i).toString());
+                params.put("assist_alumnos", assistParam.get(i).toString());
+                params.put("fecha", globalData.getFechaCurrent());
+                params.put("grupo", globalData.getIdCurrentGrupo().toString());
+                params.put("cuenta", globalData.getUserID().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
     private void ultimaTomaAsistencia() {
 
         showpDialog();
@@ -340,146 +418,6 @@ public class TomaAsistencia extends AppCompatActivity implements  TomaAlumno.OnF
                 Map<String, String> params = new HashMap<String, String>();
 
                 Log.d("Dato", idParam.toString());
-
-                params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
-
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(req);
-
-    }
-
-    private void revisarAusencias() {
-
-        showpDialog();
-
-        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/RevisarAsistenciaService",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d(TAG, response.toString());
-
-                        try {
-
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if (globalData.getIdAlumnosAusentesRecurrentes() == null) {
-                                arrayNames = new ArrayList<>();
-                                arrayIds = new ArrayList<>();
-                                arrayDni = new ArrayList<>();
-                                arrayTel = new ArrayList<>();
-                                arrayCel = new ArrayList<>();
-                                arrayEmail = new ArrayList<>();
-                                arrayDireccion = new ArrayList<>();
-                                arrayNacionalidad = new ArrayList<>();
-                                arrayCurso = new ArrayList<>();
-                            }
-                            else {
-                                arrayNames = globalData.getNombreAlumnosAusentesRecurrentes();
-                                arrayIds = globalData.getIdAlumnosAusentesRecurrentes();
-                                arrayDni = globalData.getDniAlumnosAusentesRecurrentes();
-                                arrayTel = globalData.getTelefonoAlumnosAusentesRecurrentes();
-                                arrayCel = globalData.getCelularAlumnosAusentesRecurrentes();
-                                arrayEmail = globalData.getEmailAlumnosAusentesRecurrentes();
-                                arrayDireccion = globalData.getDireccionAlumnosAusentesRecurrentes();
-                                arrayNacionalidad = globalData.getNacionalidadAlumnosAusentesRecurrentes();
-                                arrayCurso = globalData.getCursoAlumnosAusentesRecurrentes();
-                            }
-
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                                JSONArray alumnos_id = jsonObject.getJSONArray("id");
-                                JSONArray alumnos_name = jsonObject.getJSONArray("name");
-                                JSONArray alumnos_dni = jsonObject.getJSONArray("dni");
-                                JSONArray alumnos_tel = jsonObject.getJSONArray("phone");
-                                JSONArray alumnos_cel = jsonObject.getJSONArray("mobile");
-                                JSONArray alumnos_email = jsonObject.getJSONArray("email");
-                                JSONArray alumnos_direccion = jsonObject.getJSONArray("direccion");
-                                JSONArray alumnos_nacionalidad = jsonObject.getJSONArray("nacionalidad");
-                                JSONArray alumnos_curso = jsonObject.getJSONArray("curso");
-
-                                for (int j = 0; j < alumnos_id.length(); j++) {
-
-                                    if (globalData.getIdAlumnosAusentesRecurrentes() != null) {
-
-                                        if (arrayIds.get(j) != globalData.getIdAlumnosAusentesRecurrentes().get(j)) {
-
-                                            arrayIds.add(alumnos_id.getInt(j));
-                                            arrayNames.add(alumnos_name.getString(j));
-                                            arrayDni.add(alumnos_dni.getString(j));
-                                            arrayTel.add(alumnos_tel.getString(j));
-                                            arrayCel.add(alumnos_cel.getString(j));
-                                            arrayEmail.add(alumnos_email.getString(j));
-                                            arrayDireccion.add(alumnos_direccion.getString(j));
-                                            arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
-                                            arrayCurso.add(alumnos_curso.getString(j));
-
-                                        }
-
-                                    }
-                                    else {
-                                        arrayIds.add(alumnos_id.getInt(j));
-                                        arrayNames.add(alumnos_name.getString(j));
-                                        arrayDni.add(alumnos_dni.getString(j));
-                                        arrayTel.add(alumnos_tel.getString(j));
-                                        arrayCel.add(alumnos_cel.getString(j));
-                                        arrayEmail.add(alumnos_email.getString(j));
-                                        arrayDireccion.add(alumnos_direccion.getString(j));
-                                        arrayNacionalidad.add(alumnos_nacionalidad.getString(j));
-                                        arrayCurso.add(alumnos_curso.getString(j));
-                                    }
-
-                                }
-
-                            }
-
-                            globalData.setIdAlumnosAusentesRecurrentes(arrayIds);
-                            globalData.setNombreAlumnosAusentesRecurrentes(arrayNames);
-                            globalData.setDniAlumnosAusentesRecurrentes(arrayDni);
-                            globalData.setTelefonoAlumnosAusentesRecurrentes(arrayTel);
-                            globalData.setCelularAlumnosAusentesRecurrentes(arrayCel);
-                            globalData.setEmailAlumnosAusentesRecurrentes(arrayEmail);
-                            globalData.setDireccionAlumnosAusentesRecurrentes(arrayDireccion);
-                            globalData.setNacionalidadAlumnosAusentesRecurrentes(arrayNacionalidad);
-                            globalData.setCursoAlumnosAusentesRecurrentes(arrayCurso);
-
-
-                            //Log.d("Pepe", arrayNames.toString());
-                            Toast.makeText(getApplicationContext(), "Se guardó la asistencia", Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getApplicationContext(), globalData.getNombreAlumnosAusentesRecurrentes().toString(), Toast.LENGTH_SHORT).show();
-
-                            //Log.d("Pepe", arrayNames.toString());
-
-                            Intent intent = new Intent(TomaAsistencia.this, CursosDetail.class);
-                            intent.putExtra("Nombre", globalData.getNameCurrentGrupo().toString());
-                            intent.putExtra("ID", globalData.getIdCurrentGrupo());
-                            startActivity(intent);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        hidepDialog();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                hidepDialog();
-            }
-        }) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> params = new HashMap<String, String>();
 
                 params.put("id_grupo", globalData.getIdCurrentGrupo().toString());
 
