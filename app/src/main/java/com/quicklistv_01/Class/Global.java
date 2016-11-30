@@ -50,6 +50,8 @@ public class Global extends AppController {
 
     private boolean agregado = false;
 
+    private boolean modificar = false;
+
     public Integer getUserID() {
         return userID;
     }
@@ -270,13 +272,19 @@ public class Global extends AppController {
         this.asistenciaAlumnosEnGrupo = asistenciaAlumnosEnGrupo;
     }
 
-
-
     public String getFechaCurrent() {
         return fechaCurrent;
     }
 
     public void setFechaCurrent(String fechaCurrent) {
         this.fechaCurrent = fechaCurrent;
+    }
+
+    public boolean isModificar() {
+        return modificar;
+    }
+
+    public void setModificar(boolean modificar) {
+        this.modificar = modificar;
     }
 }
