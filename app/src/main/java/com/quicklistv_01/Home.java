@@ -269,16 +269,12 @@ public class Home extends AppCompatActivity
     // Cerrar la sesion del user
     private void logout() {
 
-        showpDialog();
-
         StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/LogoutService",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.d(TAG, response.toString());
-
-                        hidepDialog();
 
                     }
                 }, new Response.ErrorListener() {
@@ -287,7 +283,6 @@ public class Home extends AppCompatActivity
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
-                hidepDialog();
             }
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
