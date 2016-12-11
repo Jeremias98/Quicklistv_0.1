@@ -2,6 +2,7 @@ package com.quicklistv_01.Adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,6 +19,7 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<String> nombres = new ArrayList<>();
     private List<Alumno> alumnos = new ArrayList<>();
+    private Integer cantidadAlumnos = 0;
 
     private int pages;
 
@@ -27,6 +29,10 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
     public AlumnosViewPagerAdapter(android.support.v4.app.FragmentManager fm, Context context, ArrayList<Integer> ids, ArrayList<String> names) {
 
         super(fm);
+
+        for (Integer i : ids) {
+            cantidadAlumnos += 1;
+        }
 
         this.ids = ids;
         this.nombres = names;
@@ -82,4 +88,19 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
         this.alumnos.add(new Alumno(id, asistencia));
     }
 
+    public String getAsistencia(Integer currentItem) {
+
+        String asistencia = "";
+
+        if (this.alumnos.size() > 0) {
+            asistencia = this.alumnos.get(currentItem).getAsistencia().toString();
+        }
+
+        return asistencia;
+
+    }
+
+    public Integer getCantidadAlumnos() {
+        return cantidadAlumnos;
+    }
 }

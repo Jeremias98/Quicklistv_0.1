@@ -33,8 +33,12 @@ public class TomaAlumno extends Fragment {
     public ViewPager mViewPager;
     public AlumnosViewPagerAdapter adapter;
 
+    private List<String> assistColour = new ArrayList<>();
+
     // Variables globales
     private Global globalData;
+
+    boolean flag = false;
 
     public static final String ARG_SECTION_NAME = "section_name";
 
@@ -46,12 +50,13 @@ public class TomaAlumno extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         globalData = (Global) getActivity().getApplication().getApplicationContext();
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
 
         Bundle args = getArguments();
@@ -71,8 +76,14 @@ public class TomaAlumno extends Fragment {
         if (globalData.isModificar()) {
             ((TextView) rootView.findViewById(R.id.fecha)).setText(
                     globalData.getFechaCurrent());
-        }
-        else {
+            Integer index = 0;
+            for (String i : globalData.getAsistenciaAlumnosEnGrupo()) {
+
+                assistColour.add(index, i);
+
+                index ++;
+            }
+        } else {
             ((TextView) rootView.findViewById(R.id.fecha)).setText(
                     currentDateTimeString);
         }
@@ -90,11 +101,24 @@ public class TomaAlumno extends Fragment {
         btn_ausente = (Button) rootView.findViewById(R.id.btn_ausente);
         btn_tarde = (Button) rootView.findViewById(R.id.btn_tarde);
 
+        if (assistColour.size() > 0) {
+
+            if (assistColour.get(mViewPager.getCurrentItem()).equals("PRESENTE")) {
+                btn_presente.setBackgroundColor(Color.rgb(20, 20, 20));
+            } else if (assistColour.get(mViewPager.getCurrentItem()).equals("AUSENTE")) {
+                btn_ausente.setBackgroundColor(Color.rgb(20, 20, 20));
+            } else if (assistColour.get(mViewPager.getCurrentItem()).equals("TARDE")) {
+                btn_tarde.setBackgroundColor(Color.rgb(20, 20, 20));
+            }
+        }
+
         btn_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
+
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -104,6 +128,7 @@ public class TomaAlumno extends Fragment {
             public void onClick(View view) {
                 //Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
+
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -111,11 +136,15 @@ public class TomaAlumno extends Fragment {
         btn_tarde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
+
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
+
+
 
         return rootView;
     }

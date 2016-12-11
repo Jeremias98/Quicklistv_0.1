@@ -193,7 +193,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    // JSON stuff
+    // Método para ingresar un usuario
     private void ingresarUsuario() {
 
         SharedPreferences prefencias = getSharedPreferences("Red" , 0);
@@ -245,6 +245,7 @@ public class Login extends AppCompatActivity {
                             }
 
                             Intent intent = new Intent(Login.this, Home.class);
+
                             globalData.setUserID(userId);
                             globalData.setUserName(userName);
                             globalData.setUrl(relativeUrl);

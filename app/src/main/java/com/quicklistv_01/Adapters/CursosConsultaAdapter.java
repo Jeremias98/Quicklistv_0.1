@@ -68,7 +68,6 @@ public class CursosConsultaAdapter extends RecyclerView.Adapter<CursosConsultaAd
         return new cursosConsultaViewHolder(v,this);
     }
 
-
     @Override
     public void onBindViewHolder(final cursosConsultaViewHolder holder, final int position) {
         Curso curso = cursos.get(position);
