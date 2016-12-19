@@ -141,6 +141,7 @@ public class Login extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void Guardar() {
 
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
@@ -165,6 +166,7 @@ public class Login extends AppCompatActivity {
 
         editor.commit();
     }
+
     public void CargarDatos(){
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         chRecordar.setChecked(preferences.getBoolean("checked", false));
@@ -172,8 +174,28 @@ public class Login extends AppCompatActivity {
         edUser.setText(preferences.getString("user", ""));
     }
 
-    // JSON stuff
+    @Override
+    public void onStop() {
+
+        super.onStop();
+
+        if (globalData.getUserID() != null) {
+            logout();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        logout();
+        finishAffinity();
+
+    }
+
+    // Método para ingresar un usuario
     private void ingresarUsuario() {
+
         SharedPreferences prefencias = getSharedPreferences("Red" , 0);
         ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
         relativeUrl = ip;
@@ -223,6 +245,7 @@ public class Login extends AppCompatActivity {
                             }
 
                             Intent intent = new Intent(Login.this, Home.class);
+
                             globalData.setUserID(userId);
                             globalData.setUserName(userName);
                             globalData.setUrl(relativeUrl);
@@ -264,6 +287,46 @@ public class Login extends AppCompatActivity {
 
                 params.put("user", edUser.getText().toString());
                 params.put("password", edPass.getText().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    // Cerrar la sesion del user
+    private void logout() {
+
+        SharedPreferences prefencias = getSharedPreferences("Red" , 0);
+        ip = "http://"+prefencias.getString("ip_config","")+":"+prefencias.getString("puerto","")+"/Quicklist";
+        relativeUrl = ip;
+        globalData.setUrl(relativeUrl);
+
+        StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/LogoutService",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(TAG, response.toString());
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", globalData.getUserID().toString());
 
                 return params;
             }

@@ -19,13 +19,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Selection;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,9 +46,13 @@ import com.quicklistv_01.SegundaPantallas.Preferences;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
+
+    private static final String SHOWCASE_ID = "";
 
     // TAG
     public static String TAG = Home.class.getSimpleName();
@@ -58,44 +62,18 @@ public class Home extends AppCompatActivity
 
     // Progress dialog
     private ProgressDialog pDialog;
+
+    // Views
     TextView usuario;
-
-    //Boton de confirmacion de Salida
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmación");
-        builder.setMessage("Desea salir de la aplicación?");
-        builder.setPositiveButton("Confimar", new DialogInterface.OnClickListener(){
-
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                // Logout
-                logout();
-
-                finishAffinity();
-
-            }
-        });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Mantiene la pantalla encendida
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
         // Global data
@@ -107,6 +85,7 @@ public class Home extends AppCompatActivity
         pDialog.setMessage("Espere...");
         pDialog.setCancelable(false);
 
+        // Controles
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,6 +94,7 @@ public class Home extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
@@ -154,13 +134,40 @@ public class Home extends AppCompatActivity
 
         setupNavigationDrawerContent(navigationView);
         setFragment(1);
-
-
         //drawer.openDrawer(Gravity.LEFT);
+    }
 
+    //Boton de confirmacion de Salida
+    @Override
+    public void onBackPressed() {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmación");
+        builder.setMessage("Desea salir de la aplicación?");
+        builder.setPositiveButton("Confimar", new DialogInterface.OnClickListener(){
+
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Logout
+                logout();
+
+                finishAffinity();
+
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -178,7 +185,9 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
+
             case R.id.action_notification:
                 Intent intent = new Intent(Home.this, Notificaciones.class);
                 startActivity(intent);
@@ -188,7 +197,9 @@ public class Home extends AppCompatActivity
                 drawer.openDrawer(GravityCompat.START);
                 return true;
         }
+
         return super.onOptionsItemSelected(item);
+
     }
 
 
@@ -244,6 +255,7 @@ public class Home extends AppCompatActivity
 
     //Metodo para setear los framgentos del Navigation Drawer
     public void setFragment(int position) {
+
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         switch (position) {
@@ -269,16 +281,12 @@ public class Home extends AppCompatActivity
     // Cerrar la sesion del user
     private void logout() {
 
-        showpDialog();
-
         StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/LogoutService",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Log.d(TAG, response.toString());
-
-                        hidepDialog();
 
                     }
                 }, new Response.ErrorListener() {
@@ -287,7 +295,6 @@ public class Home extends AppCompatActivity
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
-                hidepDialog();
             }
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -326,9 +333,7 @@ public class Home extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
+    public void onFragmentInteraction(Uri uri) {}
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

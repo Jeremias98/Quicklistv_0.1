@@ -16,6 +16,7 @@ public class Global extends AppController {
     private Integer idCurrentGrupo;
     private String nameCurrentGrupo;
     private String fechaCurrent;
+    private Integer cantidadAlumnosEnCurrentGrupo;
 
     // Lista de cursos
     private ArrayList<Integer> idGrupos;
@@ -286,5 +287,13 @@ public class Global extends AppController {
 
     public void setModificar(boolean modificar) {
         this.modificar = modificar;
+    }
+
+    public Integer getCantidadAlumnosEnCurrentGrupo() {
+        return cantidadAlumnosEnCurrentGrupo;
+    }
+
+    public void setCantidadAlumnosEnCurrentGrupo(Integer cantidadAlumnosEnCurrentGrupo) {
+        this.cantidadAlumnosEnCurrentGrupo = cantidadAlumnosEnCurrentGrupo;
     }
 }
