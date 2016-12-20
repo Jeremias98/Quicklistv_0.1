@@ -25,21 +25,17 @@ import java.util.List;
 
 public class TomaAlumno extends Fragment {
 
-    public List<Alumno> alumnoList = new ArrayList<>();
 
-    private Button btn_presente;
-    private Button btn_ausente;
-    private Button btn_tarde;
+    public List<Alumno> alumnoList = new ArrayList<>();
+    private Button btn_presente, btn_ausente, btn_tarde;
     public ViewPager mViewPager;
     public AlumnosViewPagerAdapter adapter;
-
     private List<String> assistColour = new ArrayList<>();
 
     // Variables globales
     private Global globalData;
 
-    boolean flag = false;
-
+    private boolean flag = false, onclickButton;
     public static final String ARG_SECTION_NAME = "section_name";
 
     public TomaAlumno() {
@@ -62,7 +58,6 @@ public class TomaAlumno extends Fragment {
         Bundle args = getArguments();
 
         View rootView = inflater.inflate(R.layout.fragment_toma_alumno, container, false);
-        View view = inflater.inflate(R.layout.fragment_toma_asistencia, container, false);
 
         ((TextView) rootView.findViewById(R.id.nombre_apellido)).setText(
                 args.getString(ARG_SECTION_NAME));
@@ -115,6 +110,9 @@ public class TomaAlumno extends Fragment {
         btn_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonChanged(btn_presente);
+                buttonNormal(btn_ausente);
+                buttonNormal(btn_tarde);
 
                 //Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
@@ -126,9 +124,11 @@ public class TomaAlumno extends Fragment {
         btn_ausente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonChanged(btn_ausente);
+                buttonNormal(btn_presente);
+                buttonNormal(btn_tarde);
                 //Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
-
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -136,10 +136,12 @@ public class TomaAlumno extends Fragment {
         btn_tarde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonNormal(btn_ausente);
+                buttonNormal(btn_presente);
+                buttonChanged(btn_tarde);
 
                 //Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
-
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
             }
         });
@@ -147,6 +149,19 @@ public class TomaAlumno extends Fragment {
 
 
         return rootView;
+    }
+    public void buttonChanged(Button btn){
+        btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        btn.setTextColor(Color.parseColor("#673AB7"));
+        btn.setTextAppearance(getContext(), R.style.ButtonChanged);
+
+    }
+    public void buttonNormal(Button btn){
+        btn.setBackgroundColor(Color.parseColor("#673AB7"));
+        btn.setTextColor(Color.parseColor("#FFFFFF"));
+        btn.setTextAppearance(getContext(), R.style.ButtonNormal);
+
+
     }
 
     public interface OnFragmentInteractionListener {

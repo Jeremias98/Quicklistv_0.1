@@ -28,5 +28,19 @@
     <style name="TextViewCustomFont">
         <item name="fontPath">fonts/Raleway.woff</item>
     </style>
+    <style name="ButtonChanged">
+        <item name="android:layout_width">0dp</item>
+
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="ButtonNormal" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
 
 </resources>

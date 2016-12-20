@@ -46,13 +46,10 @@ import com.quicklistv_01.SegundaPantallas.Preferences;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
-
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Cursos.OnFragmentInteractionListener, Favoritos.OnFragmentInteractionListener {
 
-    private static final String SHOWCASE_ID = "";
 
     // TAG
     public static String TAG = Home.class.getSimpleName();
@@ -63,8 +60,7 @@ public class Home extends AppCompatActivity
     // Progress dialog
     private ProgressDialog pDialog;
 
-    // Views
-    TextView usuario;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
