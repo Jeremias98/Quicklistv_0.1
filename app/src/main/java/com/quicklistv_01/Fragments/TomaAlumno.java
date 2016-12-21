@@ -34,7 +34,7 @@ public class TomaAlumno extends Fragment {
 
     // Variables globales
     private Global globalData;
-
+    public Button btn;
     private boolean flag = false, onclickButton;
     public static final String ARG_SECTION_NAME = "section_name";
 
@@ -151,7 +151,7 @@ public class TomaAlumno extends Fragment {
         return rootView;
     }
     public void buttonChanged(Button btn){
-        btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        //getClass().getMethod(getButton().setBackgroundColor(Color.parseColor("#FFFFFF")));
         btn.setTextColor(Color.parseColor("#673AB7"));
         btn.setTextAppearance(getContext(), R.style.ButtonChanged);
 
@@ -162,6 +162,13 @@ public class TomaAlumno extends Fragment {
         btn.setTextAppearance(getContext(), R.style.ButtonNormal);
 
 
+    }
+    public void setButton(Button btn){
+        this.btn = btn;
+
+    }
+    public Button getButton(){
+        return btn;
     }
 
     public interface OnFragmentInteractionListener {

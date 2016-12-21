@@ -18,7 +18,7 @@ public class MesStatsAdapter extends RecyclerView.Adapter<MesStatsAdapter.mesSta
         implements RecyclerItemClickListener.OnItemClickListener, ItemClickMeses {
 
 
-    private Context context;
+    private final Context context;
     private List<Meses> mes = new ArrayList<>();
 
 
@@ -27,9 +27,34 @@ public class MesStatsAdapter extends RecyclerView.Adapter<MesStatsAdapter.mesSta
         this.mes = mes;
     }
 
+    @Override
+    public mesStatsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.meses_list, parent, false);
+        return new mesStatsViewHolder(v, this);
+    }
+
+    @Override
+    public void onBindViewHolder(mesStatsViewHolder holder, int position) {
+        Meses meses = mes.get(position);
+        holder.meses.setText(meses.getMeses());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mes.size();
+    }
+
+
+    @Override
+    public void onItemClick(View view, int position) {
+
+
+    }
 
     public static class mesStatsViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+            implements View.OnClickListener {
 
         private TextView meses;
         private ItemClickMeses itemClickMeses;
@@ -51,33 +76,8 @@ public class MesStatsAdapter extends RecyclerView.Adapter<MesStatsAdapter.mesSta
     }
 
 
-    @Override
-    public mesStatsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.meses_list, parent, false);
-        return new mesStatsViewHolder(v,this);
-    }
-
-    @Override
-    public void onBindViewHolder(mesStatsViewHolder holder, int position) {
-        Meses meses = mes.get(position);
-        holder.meses.setText(meses.getMeses());
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 9;
-    }
-
-
-    @Override
-    public void onItemClick(View view, int position) {
-
-    }
-
-
 }
-interface ItemClickMeses{
+
+interface ItemClickMeses {
     void onItemClick(View view, int position);
 }

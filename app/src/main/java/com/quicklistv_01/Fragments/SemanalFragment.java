@@ -82,7 +82,6 @@ public class SemanalFragment extends Fragment {
 
         //Casteando objetos
         GridView gridView = (GridView) rootview.findViewById(R.id.gridView);
-
         estadisticasSemanales(gridView);
 
 
@@ -96,6 +95,13 @@ public class SemanalFragment extends Fragment {
         gridView.setAdapter(adapter);
 
     }
+
+    public void iniciarColumnas(){
+        this.nombres.add("NOMBRE Y APELLIDO");
+        this.nombres.add("P");
+        this.nombres.add("A");
+        this.nombres.add("T");
+    }
     public void AgregarValores (String nombres, Integer presentes, Integer ausentes, Integer tardes) {
 
         this.nombres.add(nombres);
@@ -108,6 +114,7 @@ public class SemanalFragment extends Fragment {
     private void estadisticasSemanales(final GridView gv) {
 
         showpDialog();
+
 
         StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/EstadisticasAlumnoService",
                 new Response.Listener<String>() {
@@ -148,14 +155,15 @@ public class SemanalFragment extends Fragment {
                                 }
 
                             }
-
+                            iniciarColumnas();
                             for (int i = 0; i < arrayIds.size(); i++) {
-
+                                Log.d(TAG, "---Datos---" + nombres.get(i).toString());
                                 AgregarValores(arrayNames.get(i), arrayPS.get(i), arrayAS.get(i), arrayTS.get(i));
+
 
                             }
 
-                            Log.d(TAG, nombres.toString());
+                            Log.d(TAG,  nombres.toString());
 
                             IniciarGrid(gv);
 
