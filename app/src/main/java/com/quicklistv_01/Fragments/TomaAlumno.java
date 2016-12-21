@@ -107,42 +107,61 @@ public class TomaAlumno extends Fragment {
             }
         }
 
-        btn_presente.setOnClickListener(new View.OnClickListener() {
+        if(adapter.getAssist(mViewPager.getCurrentItem())== 0){}
+        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 1){
+            buttonChanged(btn_presente);
+            buttonNormal(btn_ausente);
+            buttonNormal(btn_tarde);
+        }
+
+        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 2){
+            buttonChanged(btn_ausente);
+            buttonNormal(btn_presente);
+            buttonNormal(btn_tarde);
+        }
+        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 3){
+            buttonChanged(btn_tarde);
+            buttonNormal(btn_ausente);
+            buttonNormal(btn_presente);
+        }
+
+        else btn_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonChanged(btn_presente);
-                buttonNormal(btn_ausente);
-                buttonNormal(btn_tarde);
+
 
                 //Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
-
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+
+
+
             }
         });
 
         btn_ausente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonChanged(btn_ausente);
-                buttonNormal(btn_presente);
-                buttonNormal(btn_tarde);
+
                 //Toast.makeText(getActivity(), "Ausente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 2);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+
+
             }
         });
 
         btn_tarde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonNormal(btn_ausente);
-                buttonNormal(btn_presente);
-                buttonChanged(btn_tarde);
+
+
 
                 //Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+
+
             }
         });
 
@@ -151,7 +170,7 @@ public class TomaAlumno extends Fragment {
         return rootView;
     }
     public void buttonChanged(Button btn){
-        //getClass().getMethod(getButton().setBackgroundColor(Color.parseColor("#FFFFFF")));
+        btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
         btn.setTextColor(Color.parseColor("#673AB7"));
         btn.setTextAppearance(getContext(), R.style.ButtonChanged);
 
@@ -161,15 +180,8 @@ public class TomaAlumno extends Fragment {
         btn.setTextColor(Color.parseColor("#FFFFFF"));
         btn.setTextAppearance(getContext(), R.style.ButtonNormal);
 
+    }
 
-    }
-    public void setButton(Button btn){
-        this.btn = btn;
-
-    }
-    public Button getButton(){
-        return btn;
-    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
