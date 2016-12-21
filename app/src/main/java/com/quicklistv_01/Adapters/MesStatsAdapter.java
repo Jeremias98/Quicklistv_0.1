@@ -21,26 +21,26 @@ public class MesStatsAdapter extends RecyclerView.Adapter<MesStatsAdapter.mesSta
     private final Context context;
     private List<Meses> mes = new ArrayList<>();
 
-
+    //Constructor donde le pasas los datos
     public MesStatsAdapter(Context context, List<Meses> mes) {
         this.context = context;
         this.mes = mes;
     }
-
+    //Esto crea la vista del objeto xml que le pases.
     @Override
     public mesStatsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.meses_list, parent, false);
         return new mesStatsViewHolder(v, this);
     }
-
+    //Este metodo es llamas el ViewHolder de arriba para obtener la vista y definir los meses
     @Override
     public void onBindViewHolder(mesStatsViewHolder holder, int position) {
         Meses meses = mes.get(position);
         holder.meses.setText(meses.getMeses());
 
     }
-
+    //Este metodo indica cuantos elementos va a tener
     @Override
     public int getItemCount() {
         return mes.size();
@@ -52,18 +52,18 @@ public class MesStatsAdapter extends RecyclerView.Adapter<MesStatsAdapter.mesSta
 
 
     }
-
+    //El viewholder lo que hace s basicamente contruir los elementos del recycler.
     public static class mesStatsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private TextView meses;
-        private ItemClickMeses itemClickMeses;
+        private ItemClickMeses itemClickMeses; //Instanciamos el clicListener
 
         public mesStatsViewHolder(View itemView, ItemClickMeses listener) {
             super(itemView);
             this.itemClickMeses = listener;
             meses = (TextView) itemView.findViewById(R.id.tvMes);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);//Seteamos el clickListener
 
 
         }
