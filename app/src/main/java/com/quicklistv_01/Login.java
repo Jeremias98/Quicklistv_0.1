@@ -167,7 +167,7 @@ public class Login extends AppCompatActivity {
         editor.commit();
     }
 
-    public void CargarDatos(){
+    public void CargarDatos() {
 
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         chRecordar.setChecked(preferences.getBoolean("checked", false));

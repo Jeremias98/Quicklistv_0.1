@@ -43,6 +43,7 @@ public class SemanalAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -50,7 +51,9 @@ public class SemanalAdapter extends BaseAdapter{
         gridView = inflater.inflate(R.layout.item, null);
         TextView textView = (TextView) gridView
                 .findViewById(R.id.grid_item_label);
+
         textView.setText(nombres.get(i));
+
         return textView;
 
     }
