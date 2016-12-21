@@ -81,9 +81,7 @@
         <activity
             android:name=".Splash"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Modificar"
             android:label="Modificar"
@@ -148,13 +146,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CursosDetail" />
         </activity>
-        <activity android:name=".Bienvenida"
+        <activity
+            android:name=".Bienvenida"
             android:theme="@style/Altern">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".SegundaPantallas.StatsActivity"
+            android:parentActivityName=".CursosDetail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CursosDetail" />>
+
         </activity>
     </application>
 

@@ -18,5 +18,10 @@
     <string name="next">Siguiente</string>
     <string name="menu_prompt_title">Texto</string>
     <string name="menu_prompt_description">Descripcion</string>
+    <string-array name="Cursos">
+        <item>7mo 3ra</item>
+        <item>6to 3ra</item>
+        <item>5to 3ra</item>
+    </string-array>
 
 </resources>

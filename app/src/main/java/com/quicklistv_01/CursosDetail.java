@@ -22,6 +22,7 @@ import com.quicklistv_01.Class.ListaFavoritos;
 import com.quicklistv_01.Fragments.Cursos;
 import com.quicklistv_01.SegundaPantallas.Alumnos;
 import com.quicklistv_01.SegundaPantallas.CalendarioModificaciones;
+import com.quicklistv_01.SegundaPantallas.StatsActivity;
 import com.quicklistv_01.SegundaPantallas.VerSubGrupos;
 
 public class CursosDetail extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class CursosDetail extends AppCompatActivity {
     ImageButton btn_favo;
     private  String data;
     TextView curso;
-    LinearLayout tomar, cambiar, crear;
+    LinearLayout tomar, cambiar, crear, mostrar;
 
     // Variables globales
     private Global globalData;
@@ -54,6 +55,7 @@ public class CursosDetail extends AppCompatActivity {
         tomar = (LinearLayout) findViewById(R.id.lyTomar);
         cambiar = (LinearLayout) findViewById(R.id.lyMod);
         crear = (LinearLayout) findViewById(R.id.lySub);
+        mostrar = (LinearLayout) findViewById(R.id.lyStats);
 
         tomar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +123,15 @@ public class CursosDetail extends AppCompatActivity {
                 catch(Exception e){
                     Toast.makeText(CursosDetail.this, "Hubo un error a agregar a favoritos.", Toast.LENGTH_SHORT).show();
                 }
+
+            }
+        });
+        mostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CursosDetail.this, StatsActivity.class);
+                intent.putExtra("Curso", name);
+                startActivity(intent);
 
             }
         });

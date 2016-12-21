@@ -43,6 +43,8 @@ import com.quicklistv_01.SegundaPantallas.Acerca;
 import com.quicklistv_01.SegundaPantallas.CalendarioCursos;
 import com.quicklistv_01.SegundaPantallas.Notificaciones;
 import com.quicklistv_01.SegundaPantallas.Preferences;
+import com.quicklistv_01.SegundaPantallas.StatsActivity;
+
 import java.util.HashMap;
 import java.util.Map;
 
