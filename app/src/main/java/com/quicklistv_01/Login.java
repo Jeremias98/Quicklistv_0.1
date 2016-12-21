@@ -168,10 +168,12 @@ public class Login extends AppCompatActivity {
     }
 
     public void CargarDatos(){
+
         SharedPreferences preferences = getSharedPreferences("PreferenciasLogin", Context.MODE_PRIVATE);
         chRecordar.setChecked(preferences.getBoolean("checked", false));
         edPass.setText(preferences.getString("pass", ""));
         edUser.setText(preferences.getString("user", ""));
+
     }
 
     @Override
