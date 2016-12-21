@@ -76,7 +76,7 @@ public class TomaAlumno extends Fragment {
 
                 assistColour.add(index, i);
 
-                index ++;
+                index++;
             }
         } else {
             ((TextView) rootView.findViewById(R.id.fecha)).setText(
@@ -107,31 +107,16 @@ public class TomaAlumno extends Fragment {
             }
         }
 
-        if(adapter.getAssist(mViewPager.getCurrentItem())== 0){}
-        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 1){
-            buttonChanged(btn_presente);
-            buttonNormal(btn_ausente);
-            buttonNormal(btn_tarde);
-        }
+        verificarbotones();
 
-        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 2){
-            buttonChanged(btn_ausente);
-            buttonNormal(btn_presente);
-            buttonNormal(btn_tarde);
-        }
-        else if (adapter.getAssist(mViewPager.getCurrentItem()) == 3){
-            buttonChanged(btn_tarde);
-            buttonNormal(btn_ausente);
-            buttonNormal(btn_presente);
-        }
 
-        else btn_presente.setOnClickListener(new View.OnClickListener() {
+        btn_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
                 //Toast.makeText(getActivity(), "Presente", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 1);
+
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
 
 
@@ -148,14 +133,13 @@ public class TomaAlumno extends Fragment {
                 mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
 
 
+
             }
         });
 
         btn_tarde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
                 //Toast.makeText(getActivity(), "Tarde", Toast.LENGTH_SHORT).show();
                 adapter.setAsistencia(adapter.getAlumnoId(mViewPager.getCurrentItem()), 3);
@@ -166,16 +150,36 @@ public class TomaAlumno extends Fragment {
         });
 
 
-
         return rootView;
     }
-    public void buttonChanged(Button btn){
+
+
+    public void verificarbotones() {
+
+        if (adapter.getAsistencia(mViewPager.getCurrentItem()).equals("1")) {
+            buttonChanged(btn_presente);
+            buttonNormal(btn_ausente);
+            buttonNormal(btn_tarde);
+        } else if (adapter.getAsistencia(mViewPager.getCurrentItem()).equals("2")) {
+            buttonChanged(btn_ausente);
+            buttonNormal(btn_presente);
+            buttonNormal(btn_tarde);
+        } else if (adapter.getAsistencia(mViewPager.getCurrentItem()).equals("3")) {
+            buttonChanged(btn_tarde);
+            buttonNormal(btn_ausente);
+            buttonNormal(btn_presente);
+        }
+
+    }
+
+    public void buttonChanged(Button btn) {
         btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
         btn.setTextColor(Color.parseColor("#673AB7"));
         btn.setTextAppearance(getContext(), R.style.ButtonChanged);
 
     }
-    public void buttonNormal(Button btn){
+
+    public void buttonNormal(Button btn) {
         btn.setBackgroundColor(Color.parseColor("#673AB7"));
         btn.setTextColor(Color.parseColor("#FFFFFF"));
         btn.setTextAppearance(getContext(), R.style.ButtonNormal);

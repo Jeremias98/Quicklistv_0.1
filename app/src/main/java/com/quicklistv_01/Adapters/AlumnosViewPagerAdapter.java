@@ -100,16 +100,6 @@ public class AlumnosViewPagerAdapter extends FragmentPagerAdapter {
 
     }
 
-    public Integer getAssist(Integer currentItem){
-
-
-        Integer asistencia = 0;
-        if (this.alumnos.size() > 0){
-            asistencia = this.alumnos.get(currentItem).getAsistencia();
-        }
-        Log.d("TAG" , "---DATA ASISTENCIA --- " + asistencia.toString() + " DEL ITEM : " + currentItem.toString());
-        return asistencia;
-    }
 
     public Integer getCantidadAlumnos() {
         return cantidadAlumnos;
