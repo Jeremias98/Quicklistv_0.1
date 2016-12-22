@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -63,12 +64,23 @@ public class StatsActivity extends AppCompatActivity {
     ArrayList<Integer> arrayTS;
 
     ArrayList<String> nombres = new ArrayList<>();
+    ArrayList<String> Lfebrero = new ArrayList<>();
+    ArrayList<String> Labril = new ArrayList<>();
+    ArrayList<String> Lmarzo = new ArrayList<>();
+    ArrayList<String> Lmayo = new ArrayList<>();
+    ArrayList<String> Ljunio = new ArrayList<>();
+    ArrayList<String> Ljulio = new ArrayList<>();
+    ArrayList<String> Lagosto = new ArrayList<>();
+    ArrayList<String> Lseptiembre = new ArrayList<>();
+    ArrayList<String> Loctubre = new ArrayList<>();
+    ArrayList<String> Lnoviembre = new ArrayList<>();
+    ArrayList<String> Ldiciembre = new ArrayList<>();
 
-    private RelativeLayout rlSemanal;
-    private RecyclerView rv;
-    private TextView lyNombres;
-    private GridView gridView;
-    private List<Meses> meses = new ArrayList<>();
+
+
+
+    private LinearLayout ly, ly2;
+    private GridView gridView, febrero, marzo, abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,14 +93,51 @@ public class StatsActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
         setContentView(R.layout.activity_stats);
-        rv = (RecyclerView) findViewById(R.id.rvMeses);
-        lyNombres = (TextView)findViewById(R.id.ly_nombres);
+        ly2 = (LinearLayout) findViewById(R.id.ly_semanales);
+        ly = (LinearLayout) findViewById(R.id.ly_meses);
+        febrero = (GridView) findViewById(R.id.gvFebrero);
+        marzo = (GridView) findViewById(R.id.gvFMarzo);
+        abril = (GridView) findViewById(R.id.gvAbril);
+        mayo = (GridView) findViewById(R.id.gvMayo);
+        julio = (GridView) findViewById(R.id.gvJulio);
+        junio = (GridView) findViewById(R.id.gvJunio);
+        agosto = (GridView) findViewById(R.id.gvAgosto);
+        septiembre = (GridView) findViewById(R.id.gvSeptiembre);
+        octubre = (GridView) findViewById(R.id.gvOctubre);
+        noviembre = (GridView) findViewById(R.id.gvNoviembre);
+        diciembre= (GridView) findViewById(R.id.gvDiciembre);
 
-         gridView = (GridView) findViewById(R.id.gridView);
+
+
+        gridView = (GridView) findViewById(R.id.gridView);
 
         SetearToolbar();//Establece el nombre del curso en el que esta
-        iniciarColumnas();//Agrega las columnas de Nombre, A ; P  y T
-        estadisticasSemanales(gridView);//Llena el gridview
+        iniciarColumnas(nombres);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lfebrero);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lmarzo);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Labril);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lmayo);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Ljunio);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Ljulio);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lagosto);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lseptiembre);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Loctubre);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Lnoviembre);//Agrega las columnas de Nombre, A ; P  y T
+        iniciarColumnas(Ldiciembre);//Agrega las columnas de Nombre, A ; P  y T
+
+
+        estadisticasSemanales(gridView, nombres);//Llena el gridview
+        estadisticasSemanales(febrero, Lfebrero);
+        estadisticasSemanales(marzo, Lmarzo);
+        estadisticasSemanales(abril, Labril);
+        estadisticasSemanales(mayo, Lmayo);
+        estadisticasSemanales(junio, Ljunio);
+        estadisticasSemanales(julio, Ljulio);
+        estadisticasSemanales(agosto, Lagosto);
+        estadisticasSemanales(septiembre, Lseptiembre);
+        estadisticasSemanales(octubre, Loctubre);
+        estadisticasSemanales(noviembre, Lnoviembre);
+        estadisticasSemanales(diciembre, Ldiciembre);
 
 
 
@@ -102,33 +151,32 @@ public class StatsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(name);
 
     }
-    public void iniciarColumnas(){
-        this.nombres.add("NOMBRE Y APELLIDO");
-        this.nombres.add("P");
-        this.nombres.add("A");
-        this.nombres.add("T");
+    public void iniciarColumnas(ArrayList<String> list){
+        list.add("NOMBRE Y APELLIDO");
+        list.add("P");
+        list.add("A");
+        list.add("T");
     }
 
 
-    public void IniciarGrid(GridView gridView) {
+    public void IniciarGrid(GridView gridView, ArrayList<String> list) {
 
-        SemanalAdapter adapter = new SemanalAdapter(getApplicationContext(), nombres);//instancia el adaptador
+        SemanalAdapter adapter = new SemanalAdapter(getApplicationContext(), list);//instancia el adaptador
         gridView.setAdapter(adapter);//Seteal el adaptador
 
     }
-    public void AgregarValores (String nombres, Integer presentes, Integer ausentes, Integer tardes) {
+    public void AgregarValores (ArrayList<String> list, String nombres, Integer presentes, Integer ausentes, Integer tardes) {
 
-        this.nombres.add(nombres);
-        this.nombres.add(presentes.toString());
-        this.nombres.add(ausentes.toString());
-        this.nombres.add(tardes.toString());
+        list.add(nombres);
+        list.add(presentes.toString());
+        list.add(ausentes.toString());
+        list.add(tardes.toString());
 
     }
 
-    private void estadisticasSemanales(final GridView gv) {
+    private void estadisticasSemanales(final GridView gv, final ArrayList<String> list) {
 
         showpDialog();
-
         StringRequest req = new StringRequest(Request.Method.POST, globalData.getUrl() + "/EstadisticasAlumnoService",
                 new Response.Listener<String>() {
                     @Override
@@ -171,13 +219,13 @@ public class StatsActivity extends AppCompatActivity {
 
                             for (int i = 0; i < arrayIds.size(); i++) {
 
-                                AgregarValores(arrayNames.get(i), arrayPS.get(i), arrayAS.get(i), arrayTS.get(i));
+                                AgregarValores(list,arrayNames.get(i), arrayPS.get(i), arrayAS.get(i), arrayTS.get(i));
 
                             }
 
-                            Log.d(TAG, nombres.toString());
+                            Log.d(TAG, list.toString());
 
-                            IniciarGrid(gv);
+                            IniciarGrid(gv, list);
 
 
                         } catch (JSONException e) {
@@ -238,54 +286,17 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     public void btnSemanal (View view){
-        rv.setVisibility(View.GONE);
-        gridView.setVisibility(View.VISIBLE);
-        lyNombres.setText("ESTADISTICAS SEMANALES");
+        ly.setVisibility(View.GONE);
+        ly2.setVisibility(View.VISIBLE);
     }
     public void btnMensuales(View view){
-        gridView.setVisibility(View.GONE);
-        rv.setVisibility(View.VISIBLE);
-        lyNombres.setText("ESTADISTICAS MENSUALES");
-        cargarMeses();
-        configurarAdaptador();
-        iniciarAdaptador();
-        SetearAdaptador();
+        ly2.setVisibility(View.GONE);
+        ly.setVisibility(View.VISIBLE);
 
 
 
     }
 
 
-    private void cargarMeses() {
-        meses.add(new Meses("Marzo"));
-        meses.add(new Meses("Abril"));
-        meses.add(new Meses("Mayo"));
-        meses.add(new Meses("Junio"));
-        meses.add(new Meses("Julio"));
-        meses.add(new Meses("Agosto"));
-        meses.add(new Meses("Septiembre"));
-        meses.add(new Meses("Octurbre"));
-        meses.add(new Meses("Noviembre"));
-        meses.add(new Meses("Diciembre"));
 
-    }
-
-    public void configurarAdaptador() {
-        LinearLayoutManager lim = new LinearLayoutManager(getApplicationContext());
-        lim.setOrientation(LinearLayoutManager.VERTICAL);
-        rv.setItemAnimator(new DefaultItemAnimator());
-        rv.addItemDecoration(new com.quicklistv_01.Class.DividerItemDecoration(getApplicationContext()));
-        rv.addItemDecoration(new com.quicklistv_01.Class.DividerItemDecoration(getApplicationContext(), R.drawable.barra));
-    }
-
-    public MesStatsAdapter adapter;
-
-    public void iniciarAdaptador() {
-        adapter = new MesStatsAdapter(getApplicationContext(), meses);
-
-    }
-
-    public void SetearAdaptador() {
-        rv.setAdapter(adapter);
-    }
 }
